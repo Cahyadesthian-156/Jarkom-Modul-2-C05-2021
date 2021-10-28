@@ -18,5 +18,7 @@ Ghifari Astaudi U (05111940000012)
     apt-get install bind9 -y
     apt-get install sudo
     apt-get install nano
-    ```
-    Lalu jalankan command berikut ```bash /root/.bashrc``` untuk menginstall command yang sudah diinputkan pada .bashrc
+      ```
+   Lalu jalankan command berikut ```bash /root/.bashrc``` untuk menginstall command yang sudah diinputkan pada .bashrc
+2. Buat script.sh dengan command ```bash /root/scipt.sh``` dan buat domain franky.C05.com
+
