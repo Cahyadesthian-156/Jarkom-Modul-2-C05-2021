@@ -97,15 +97,16 @@ zone "franky.C05.com" {\n\t
             allow-transfer { 192.186.2.3; };\n\t
             file "/etc/bind/kaizoku/franky.C05.com";\n\t
    }; > /etc/bind/named.conf.local
-```
+```                                                                                             
 <img src="https://github.com/Cahyadesthian-156/empty/blob/main/nomer5-1.png" width="700">  
-kemudia pada Water7 di (/root/.bashrc)
+
+kemudian pada Water7 di (/root/.bashrc)
 ```
 echo nameserver 192.168.122.1 > /etc/resolv.conf
 apt-get update
 apt-get install bind9 -y
-```
-lalu di water7 (/root/script.sh)
+```                                                                     
+lalu di water7 (/root/script.sh)                                                            
 ```
 echo -e’
 zone "franky.C05.com" {\n\t
@@ -113,18 +114,17 @@ zone "franky.C05.com" {\n\t
         masters { 192.186.2.2; };\n\t
         file "/var/lib/bind/franky.C05.com";\n\t
     };’ > /etc/bind/named.conf.local
-```                                         
-kemudian restart bind9                      
-```service bind9 restart```                                                     
-dan pada server EniesLobby mematikan service bind9                                                                                                   
-```service bind9 stop```                                                    
+```
+
+kemudian melakukan restart bind9 ```service bind9 restart```                                                     
+dan pada server EniesLobby mematikan service bind9 ```service bind9 stop```                                                         
 setelah itu untuk mencoba pada Loguetown ditambahkan ip water 7                                                                                           
 ```
 echo -e 'nameserver 192.186.2.2
 nameserver 192.186.2.4
 nameserver 192.186.2.3' > /etc/resolv.conf
 ```
-Lalu ping franky.C05.com
+Lalu ping franky.C05.com                                                                    
 <img src="https://github.com/Cahyadesthian-156/empty/blob/main/nomer5-2.png" width="500">  
 
 
