@@ -113,7 +113,8 @@ Lalu ping franky.C05.com
 <img src="https://github.com/Cahyadesthian-156/empty/blob/main/nomer5-2.png" width="500">  
 
 ## Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache 
-Pada router Skypie, Edit file `super.franky.C05.com.conf`pada directory `/etc/apache2/sites-available` dan tambahkan 
+**Pada router Skypie**
+Edit file `super.franky.C05.com.conf`pada directory `/etc/apache2/sites-available` dan tambahkan 
 ``` 
     ErrorDocument 404 /error/404.html
     <Files "/error/404.html">
@@ -123,11 +124,13 @@ Pada router Skypie, Edit file `super.franky.C05.com.conf`pada directory `/etc/ap
     </Files> 
 ```
 Kemudian restrart dengan perintah ``` service apache2 restart ```
-Pada Loguetown dan Alabasta
+**Pada Loguetown dan Alabasta**
+
 Lakukan perintah ```lynx super.franky.C05.com/rickygantengbosskuh ``` untuk melihat hasil errornya
 
 ## Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.yyy.com/public/js menjadi www.super.franky.yyy.com/js
-Pada router Skypie, Edit file `super.franky.C05.com.conf` pada directory `/etc/apache2/sites-available` dan tambahkan
+**Pada router Skypie**
+Edit file `super.franky.C05.com.conf` pada directory `/etc/apache2/sites-available` dan tambahkan
 ```Alias "/js" "/var/www/super.franky.C05.com/public/js"```
 Lakukan ```a2ensite super.franky.C05.com.conf```
 Kemudian restrart dengan perintah ``` service apache2 restart ```
@@ -136,6 +139,7 @@ Pada Loguetown dan Alabasta
 Lakukan perintah ```lynx super.franky.C05.com/js ``` untuk melihat hasilnya
 
 ## Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
+**Pada router Skypie**
 Pada command.sh beri perintah berikut, dengan langkah membuat directory terlebih dahulu, setelah itu mendownload file zip dan meng unzip file tersebut.Lalu dilakukan pemindahan data dari super.franky ke super.franky.C05.com. Setelah itu lakukan copy pada 000-default.conf 
 ```
 mkdir /var/www/general.mecha.franky.C05.com
@@ -148,7 +152,6 @@ mv general.mecha.franky/f1.png /var/www/general.mecha.franky.C05.com
 mv general.mecha.franky/funko-pop.jpg /var/www/general.mecha.franky.C05.com
 cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/general.mecha.franky.C05.com.conf
 ```
-Pada router Skypie
 Edit file general-script.sh untuk directory /etc/apache2/sites-available/general.mecha.franky.C05.com.conf
 ```
       echo '<VirtualHost *:15000 *:15500>
@@ -194,10 +197,12 @@ Lakukan konfigurasi pada zone general.mecha.franky.C05.com
 
 Lakukan restart bind9 dengan perintah `Service bind9 restart`
 
-Pada Loguetown dan Alabasta jalankan perintah
-`lynx general.mecha.franky.C05.com :15000`
+Pada Loguetown dan Alabasta 
+
+Jalankan perintah`lynx general.mecha.franky.C05.com :15000`
 
 ## dengan authentikasi username luffy dan password onepiece dan file di /var/www/general.mecha.franky.yyy
+**Pada router Skypie**
 Buat username (luffy) dan password dengan menginputkan comment `htpasswd -c /etc/apache2/.htpasswd luffy` Kemudian isi password sesuai kiteria (onepiece)
 
 Buat file `.htaccess` pada `/var/www/general.mecha.franky.C05.com/.htaccess` dan edit file `.htaccess` seperti:
@@ -216,10 +221,10 @@ Edit file general.mecha.franky.C05.com.conf pada directory /etc/apache2/sites-av
 ```
 Kemudian restrart dengan perintah ``` service apache2 restart ```
 
-Pada Loguetown dan Alabasta jalankan perintah
-`lynx general.mecha.franky.C05.com :15000`
+**Pada Loguetown dan Alabasta**
+Jalankan perintah `lynx general.mecha.franky.C05.com :15000`
 ## Dan setiap kali mengakses IP Skypie akan diahlikan secara otomatis ke www.franky.yyy.com
-Pada Skypie
+**Pada Skypie**
 Buat file `.htacces` pada directory `/var/www/html` dan edit sebagai berikut
 ```
 echo '
@@ -228,6 +233,7 @@ RewriteBase /
 RewriteCond %{HTTP_HOST} ^192\.186\.2\.4$
 RewriteRule ^(.*)$ http://www.franky.C05.com [L,R=301] ' > /var/www/html/.htaccess
 ```
+
 Kemudian, edit file `/000-default.conf`  pada directory `/etc/apache2/sites-available` dengan menambahkan:
 ```
 <Directory /var/www/html>
@@ -237,17 +243,17 @@ Kemudian, edit file `/000-default.conf`  pada directory `/etc/apache2/sites-avai
 ```
 Kemudian restrart dengan perintah ``` service apache2 restart ```
 
-Pada EniesLobby
-
+**Pada EniesLobby**
 Lakukan konfigurasi pada zone franky.C05.com
 
 Lakukan restart bind9 dengan perintah `Service bind9 restart`
 
-Pada Loguetown dan Alabasta
+**Pada Loguetown dan Alabasta**
 Jalankan perintah `lynx 192.186.2.4`
 
 ## Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melalui website www.super.franky.yyy.com, dan dikarenakan pengunjung web server pasti akan bingung dengan randomnya images yang ada, maka Franky juga meminta untuk mengganti request gambar yang memiliki substring “franky” akan diarahkan menuju franky.png. Maka bantulah Luffy untuk membuat konfigurasi dns dan web server ini!
-Pada Skypie
+
+**Pada Skypie**
 Edit file pada `super.franky.C05.com.conf` pada directory `/etc/apache2/sites-available/` dengan menambahkan:
  ```
  <Directory /var/www/super.franky.C05.com>
@@ -264,14 +270,10 @@ RewriteRule ^(.*)franky(.*)\.(jpg|gif|png)$ http://super.franky.C05.com/public/i
 ' > /var/www/super.franky.C05.com/.htaccess
 ```                                                   
 Jalankan perintah `a2ensite super.franky.C05.com.conf`
-Kemudian restrart dengan perintah ``` service apache2 restart ```
-
-Pada EniesLobby
-
+Kemudian restrart dengan perintah ` service apache2 restart `
+**Pada EniesLobby**
 Lakukan konfigurasi pada zone super.franky.C05.com
-
 Lakukan restart bind9 dengan perintah `Service bind9 restart`
 
-Pada Loguetown dan Alabasta
-
+**Pada Loguetown dan Alabasta**
 Jalankan command `lynx http://super.franky.C05.com/public/images/franky.png`
