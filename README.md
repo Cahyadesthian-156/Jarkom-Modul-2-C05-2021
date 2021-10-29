@@ -113,7 +113,7 @@ Lalu ping franky.C05.com
 <img src="https://github.com/Cahyadesthian-156/empty/blob/main/nomer5-2.png" width="500">  
 
 ## Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache 
-Pada router Skypie, Edit file `super.franky.C05.com.conf` dengan masuk ke directory `/etc/apache2/sites-available` dan tambahkan 
+Pada router Skypie, Edit file `super.franky.C05.com.conf`pada directory `/etc/apache2/sites-available` dan tambahkan 
 ``` 
     ErrorDocument 404 /error/404.html
     <Files "/error/404.html">
@@ -128,7 +128,7 @@ Pada Loguetown dan Alabasta
 Lakukan perintah ```lynx super.franky.C05.com/rickygantengbosskuh ``` untuk melihat hasil errornya
 
 ## Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.yyy.com/public/js menjadi www.super.franky.yyy.com/js
-Pada router Skypie, Edit file `super.franky.C05.com.conf` dengan masuk ke directory `/etc/apache2/sites-available` dan tambahkan
+Pada router Skypie, Edit file `super.franky.C05.com.conf` pada directory `/etc/apache2/sites-available` dan tambahkan
 ```Alias "/js" "/var/www/super.franky.C05.com/public/js"```
 Lakukan ```a2ensite super.franky.C05.com.conf```
 Kemudian restrart dengan perintah ``` service apache2 restart ```
@@ -149,6 +149,21 @@ mv general.mecha.franky/f1.png /var/www/general.mecha.franky.C05.com
 mv general.mecha.franky/funko-pop.jpg /var/www/general.mecha.franky.C05.com
 cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/general.mecha.franky.C05.com.conf
 ```
+Pada router Skypie, Edit file general-script.sh untuk directory /etc/apache2/sites-available/general.mecha.franky.C05.com.conf
+```
+      echo '<VirtualHost *:15000 *:15500>
+    	ServerAdmin webmaster@localhost
+    	ServerName general.mecha.franky.C05.com
+    	ServerAlias www.general.mecha.franky.C05.com
+    	DocumentRoot /var/www/general.mecha.franky.C05.com
 
+    	<Directory /var/www/general.mecha.franky.C05.com>
+            	Options +FollowSymLinks -Multiviews
+            	AllowOverride All
+    	</Directory>
+ ErrorLog ${APACHE_LOG_DIR}/error.log
+ CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/general.mecha.franky.C05.com.conf
+```
 
 .                                                   
