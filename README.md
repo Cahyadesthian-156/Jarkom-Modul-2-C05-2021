@@ -95,11 +95,11 @@ untuk mendapatkan IP(dalam kasus ini 192.168.122. ) yang kemudian diatur pada se
 echo nameserver 192.168.122.1 > /etc/resolv.conf
 ```
 kemudian pada setiap node bisa dilakukan ping google.com atau apt-get update atau lainnya
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer1/alabsta-setup.png" width="400">    
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer1/enieslobby0setup.png" width="400">   
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer1/loguetown-setup.png" width="400">   
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer1/skypie-wetup.png" width="400">   
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer1/water7-setup.png" width="400">   
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer1/alabsta-setup.png" width="400">    
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer1/enieslobby0setup.png" width="400">   
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer1/loguetown-setup.png" width="400">   
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer1/skypie-wetup.png" width="400">   
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer1/water7-setup.png" width="400">   
 .                                                                                           
 .                                                                                                         
 .                                                                                                                                                                                                     
@@ -135,7 +135,7 @@ cp /etc/bind/db.local /etc/bind/kaizoku/franky.C05.com
 kemudian, masuk ke franky.C05.com ```nano /etc/bind/kaizoku/franky.C05.com```
 
 Kemudian edit file tersebut sebagai beriku dan tambahkan alias dengan record CNAME pada file tersebut:
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer2/nomer2-2.png" width="700"> 
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer2/nomer2-2.png" width="700"> 
 
 Setelah itu keluar dari file dan melakukan restart bind9 ```service bind9 restart```
 
@@ -178,7 +178,7 @@ Atur nameserver seperti berikut:
 ```
 nameserver 192.186.2.2 ;IP EniesLobby
 ```
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer2/nomer2-3.png" width="700"> 
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer2/nomer2-3.png" width="700"> 
 
 
 Masukkan perintah pada script.sh
@@ -189,7 +189,7 @@ nameserver 192.186.2.3' > /etc/resolv.conf
 ```
 
 lalu melakukan percobaan ping franky.C05.com dan host -t CNAME www.franky.C05.com
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer2/nomer2-4.png" width="700">
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer2/nomer2-4.png" width="700">
 
 .                                         
 .                                                                                                                                 
@@ -218,7 +218,7 @@ super  	    IN      	A            	192.186.2.4   ;IPSkypie
 
 
 kemudian buat Zone baru ```nano /etc/bind/named.conf.local```                                               
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer3/nomer3-2.jpg" width="700">
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer3/nomer3-2.jpg" width="700">
 ```
 zone "super.franky.C05.com" {
         	type master;
@@ -231,7 +231,7 @@ Copy db.local ke folder ./kaizoku
 cp /etc/bind/db.local /etc/bind/kaizoku/super.franky.C05.com
 ```
 lakukan konfigurasi pada super.franky.C05.com                                         
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer3/nomer3-3.jpg" width="700">
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer3/nomer3-3.jpg" width="700">
 
 ```
 $TTL 	604800
@@ -309,7 +309,7 @@ Pada node client (Loguetown dan Alabasta), arahkan nameserver menuju IP Skypie d
 nameserver 192.186.2.2
 nameserver 192.186.2.4
 ```                                                                                           
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer3/nomer3-4.jpg" width="700">       
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer3/nomer3-4.jpg" width="700">       
 
 kemudian lakukan ping pada super.franky.C05.com dan www.super.franky.C05.com atau host -t CNAME www.super.franky.C05.com dan www.super.franky.C05.com                     
 <img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer3/nomer3-5.jpg" width="700">                         
@@ -329,7 +329,7 @@ file "/etc/bind/kaizoku/2.186.192.in-addr.arpa";
 };
 ```
 sehingga zone menjadi                                                 
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer4/nomer4-1.jpg" width="700">
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer4/nomer4-1.jpg" width="700">
 
 
 kemudian copy file db.local pada path /etc/bind ke dalam folder kaizoku yang baru saja dibuat dan ubah namanya menjadi 2.186.192.in-addr.arpa
@@ -340,7 +340,7 @@ cp /etc/bind/db.local /etc/bind/kaizoku/2.186.192.in-addr.arpa
 
 
 lalu edit file 2.186.192.in-addr.arpa                                                               
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer4/nomer4-2.jpg" width="700"> 
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer4/nomer4-2.jpg" width="700"> 
 
 
 Perintah tersebut dimasukkan dalam script.sh
@@ -384,7 +384,7 @@ Kemudian restart bind9 dengan perintah ```service bind9 restart```
 setelah itu pada node client (Loguetown dan Alabasta) cek dengan melakukan 
 ```host -t PTR 192.186.2.2```
 
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer4/nomer4-3.jpg" width="700">     
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer4/nomer4-3.jpg" width="700">     
 
 .                                                                                         
 .                                                                                                           
@@ -405,7 +405,7 @@ zone "franky.C05.com" {
             file "/etc/bind/kaizoku/franky.C05.com";
 }; 
 ```                                                                                                                              
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer5/nomer5-1.jpg" width="700">   
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer5/nomer5-1.jpg" width="700">   
 
 
 
@@ -427,7 +427,7 @@ zone "franky.C05.com" {
         file "/var/lib/bind/franky.C05.com";
  }; 
 ```                                                                       
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer5/nomer5-2.jpg" width="700">   
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer5/nomer5-2.jpg" width="700">   
 
 
 Perintah tersebut dimasukkan dalam script.sh
@@ -443,13 +443,13 @@ zone "franky.C05.com" {
 kemudian restart bind9 ```service bind9 restart```
 
 setelah itu pada Loguetown dan Alabasta tambahkan IP Water7 sehingga nampak seperti                                       
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer5/nomer5-3.jpg" width="700">   
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer5/nomer5-3.jpg" width="700">   
 
 Untuk melakukan cek keberhasilan konfigurasi, matikan bind9 yang ada pada EniesLobby dengan command:
 ``service bind9 stop```
 
 lalu di node client (Loguetown dan Alabasta) lakukan ping franky.C05.com                                            
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer5/nomer5-4.jpg" width="700">   
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer5/nomer5-4.jpg" width="700">   
 .                                                   
 .                                                                 
 .   
@@ -468,32 +468,30 @@ $TTL 	604800
                  2419200           	; Expire
                   604800 )        	; Negative Cache TTL
 ;
-@     	 	  IN      	NS     	    franky.C05.com.
-@      		  IN      	A			      192.186.2.2  	; IP EniestLobby
-www		      IN      	CNAME       franky.C05.com.
-super		    IN	      A			      192.186.2.4 	;IP Skypie
-ns1		      IN	      A			      192.186.2.4
-mecha	      IN	      NS			    ns1
-www.mecha	  IN	      CNAME		    192.186.2.4
-```
+@     	 	  	IN      	NS     	    franky.C05.com.
+@      		  	IN      	A	    192.186.2.2  	; IP EniestLobby
+www		      	IN      	CNAME       franky.C05.com.
+super		    	IN		A	    192.186.2.4 	;IP Skypie
+ns1			IN	      	A	    192.186.2.4
+mecha	      		IN	      	NS	    ns1
+www.mecha	  	IN	      	CNAME	    192.186.2.4
+```															
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer6/nomer6-1.jpg" width="700">   
+			
+
 
 Edit file /etc/bind/named.conf.options dengan comment bagian 
 ```‘dnssec-validation auto;’``` dan menambahkan 
 ```
 `allow-query{any;};
-```
+```											
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer6/nomer6-2.jpg" width="700">   			
+
 
 kemudian pada /etc/bind/named.conf.local, edit sebagai berikut
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer6/nomer6-3.jpg" width="700">   
 
-```
-zone "franky.C05.com" {
-            type master;
-            notify yes;
-            also-notify { 192.186.2.3; };
-            allow-transfer { 192.186.2.3; }; 
-            file "/etc/bind/kaizoku/franky.C05.com";
-}; 
-```
+
 
 Pada Water7, di /etc/bind/named.conf.local
 
@@ -506,7 +504,7 @@ zone "mecha.franky.C05.com" {\n\t
 
 Lalu mkdir /etc/bind/sunnygo
 
-Setelah iitu membuat file pada directory /etc/bind/sunnygo/mecha.franky.C05.com dengan isi :
+Setelah itu membuat file pada directory /etc/bind/sunnygo/mecha.franky.C05.com dengan isi :
 
 ```
 $TTL 	604800
@@ -517,14 +515,16 @@ $TTL 	604800
                      2419200          	; Expire
                       604800 )        	; Negative Cache TTL
 ;
-@      		IN      	NS     		  mecha.franky.C05.com.
+@      		IN      	NS     			mecha.franky.C05.com.
 @      		IN      	A        		192.186.2.4  	; IP Skypie
-general	  IN	      A		        192.186.2.4
-www		    IN	      CNAME	      mecha.franky.C05.com.
+general	  	IN	      	A		        192.186.2.4
+www		IN	      	CNAME		      	mecha.franky.C05.com.
 ```
 
-kemudian pada node client ( Loguetown dan Alabasta ) dapat dilakukan ```ping mecha.franky.C05.com```  dan  ```ping www.mecha.franky.C05.com```
+kemudian pada node client ( Loguetown dan Alabasta ) dapat dilakukan ```ping mecha.franky.C05.com```  dan  ```ping www.mecha.franky.C05.com```					
 
+
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer6/nomer6-7.jpg" width="700">   						
 .                         
 .                         
 .                                                                   
