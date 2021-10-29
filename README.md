@@ -9,22 +9,7 @@ Cahyadesthian R. Widigda (05111940000156)
 ## 📅 24-26 September 2021
 Luffy adalah seorang yang akan jadi Raja Bajak Laut. Demi membuat Luffy menjadi Raja Bajak Laut, Nami ingin membuat sebuah peta, bantu Nami untuk membuat peta berikut:
 <img src="https://github.com/Cahyadesthian-156/empty/blob/main/petaluffy.png?raw=trueg" width="800">  
-EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, dan Skypie akan digunakan sebagai Web Server. Terdapat 2 Client yaitu Loguetown, dan Alabasta. Semua node terhubung pada router Foosha, sehingga dapat mengakses internet (1)
-## 2 Luffy ingin menghubungi Franky yang berada di EniesLobby dengan denden mushi. Kalian diminta Luffy untuk membuat website utama dengan mengakses franky.yyy.com dengan alias www.franky.yyy.com pada folder kaizoku
-**Jawab:**
-1. Pada EinesLobby jalankan command ```vi /root/.bashrc``` dan ketikkan command :
-    ```
-    echo nameserver 192.168.122.1 > /etc/resolv.conf
-    apt-get update
-    apt-get install bind9 -y
-    apt-get install sudo
-    apt-get install nano
-      ```
-   Lalu jalankan command berikut ```bash /root/.bashrc``` untuk menginstall command yang sudah diinputkan pada .bashrc
-2. Buat script.sh dengan command ```bash /root/scipt.sh``` dan buat domain franky.C05.com
-.               
-.                       
-.                       
+EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, dan Skypie akan digunakan sebagai Web Server. Terdapat 2 Client yaitu Loguetown, dan Alabasta. Semua node terhubung pada router Foosha, sehingga dapat mengakses internet (1)        
 .                               
 ## Setelah itu buat subdomain super.franky.yyy.com dengan alias www.super.franky.yyy.com yang diatur DNS nya di EniesLobby dan mengarah ke Skypie(3).
 Pada EniesLobby ```vi /etc/bind/kaizoku/franky.C05.com``` kemudian uncomment bagian
@@ -127,6 +112,18 @@ nameserver 192.186.2.3' > /etc/resolv.conf
 Lalu ping franky.C05.com                                                                    
 <img src="https://github.com/Cahyadesthian-156/empty/blob/main/nomer5-2.png" width="500">  
 
+## Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache 
+Pada router Skypie Edit file super.franky.C05.com.conf dengan menambahkan 
+``` ErrorDocument 404 /error/404.html
+    <Files "/error/404.html">
+    <If "-z %{ENV:REDIRECT_STATUS}">
+          RedirectMatch 404 /error/404.html$
+    </If>
+    </Files>```
+Lakukan ```a2ensite super.franky.C05.com.conf```
+Kemudian restrart dengan perintah ```service apache2 restart```
+Pada Loguetown dan Alabasta
+Lakukan perintah ```lynx super.franky.C05.com/rickygantengbosskuh``` untuk melihat hasil errornya
 
 
 .                                                   
