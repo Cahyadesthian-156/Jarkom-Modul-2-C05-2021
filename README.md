@@ -113,7 +113,7 @@ Lalu ping franky.C05.com
 <img src="https://github.com/Cahyadesthian-156/empty/blob/main/nomer5-2.png" width="500">  
 
 ## Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache 
-Pada router Skypie Edit file super.franky.C05.com.conf dengan menambahkan 
+Pada router Skypie, Edit file `super.franky.C05.com.conf` dengan masuk ke directory `/etc/apache2/sites-available` dan tambahkan 
 ``` 
     ErrorDocument 404 /error/404.html
     <Files "/error/404.html">
@@ -126,6 +126,29 @@ Lakukan ``` a2ensite super.franky.C05.com.conf ```
 Kemudian restrart dengan perintah ``` service apache2 restart ```
 Pada Loguetown dan Alabasta
 Lakukan perintah ```lynx super.franky.C05.com/rickygantengbosskuh ``` untuk melihat hasil errornya
+
+## Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.yyy.com/public/js menjadi www.super.franky.yyy.com/js
+Pada router Skypie, Edit file `super.franky.C05.com.conf` dengan masuk ke directory `/etc/apache2/sites-available` dan tambahkan
+```Alias "/js" "/var/www/super.franky.C05.com/public/js"```
+Lakukan ```a2ensite super.franky.C05.com.conf```
+Kemudian restrart dengan perintah ``` service apache2 restart ```
+
+Pada Loguetown dan Alabasta
+Lakukan perintah ```lynx super.franky.C05.com/js ``` untuk melihat hasilnya
+
+## Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
+Pada command.sh beri perintah berikut, dengan langkah membuat directory terlebih dahulu, setelah itu mendownload file zip dan meng unzip file tersebut.Lalu dilakukan pemindahan data dari super.franky ke super.franky.C05.com. Setelah itu lakukan copy pada 000-default.conf 
+```
+mkdir /var/www/general.mecha.franky.C05.com
+wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/general.mecha.franky.zip
+unzip general.mecha.franky.zip
+
+mv general.mecha.franky/drag.wav /var/www/general.mecha.franky.C05.com
+mv general.mecha.franky/duck-duck-go.jpg /var/www/general.mecha.franky.C05.com
+mv general.mecha.franky/f1.png /var/www/general.mecha.franky.C05.com
+mv general.mecha.franky/funko-pop.jpg /var/www/general.mecha.franky.C05.com
+cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/general.mecha.franky.C05.com.conf
+```
 
 
 .                                                   
