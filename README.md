@@ -271,9 +271,13 @@ RewriteRule ^(.*)franky(.*)\.(jpg|gif|png)$ http://super.franky.C05.com/public/i
 ```                                                   
 Jalankan perintah `a2ensite super.franky.C05.com.conf`
 Kemudian restrart dengan perintah ` service apache2 restart `
+
 **Pada EniesLobby**
+
 Lakukan konfigurasi pada zone super.franky.C05.com
+
 Lakukan restart bind9 dengan perintah `Service bind9 restart`
 
 **Pada Loguetown dan Alabasta**
+
 Jalankan command `lynx http://super.franky.C05.com/public/images/franky.png`
