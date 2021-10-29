@@ -114,16 +114,18 @@ Lalu ping franky.C05.com
 
 ## Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache 
 Pada router Skypie Edit file super.franky.C05.com.conf dengan menambahkan 
-``` ErrorDocument 404 /error/404.html
+``` 
+    ErrorDocument 404 /error/404.html
     <Files "/error/404.html">
     <If "-z %{ENV:REDIRECT_STATUS}">
           RedirectMatch 404 /error/404.html$
     </If>
-    </Files> ```
-Lakukan ```a2ensite super.franky.C05.com.conf```
-Kemudian restrart dengan perintah ```service apache2 restart```
+    </Files> 
+```
+Lakukan ``` a2ensite super.franky.C05.com.conf ```
+Kemudian restrart dengan perintah ``` service apache2 restart ```
 Pada Loguetown dan Alabasta
-Lakukan perintah ```lynx super.franky.C05.com/rickygantengbosskuh``` untuk melihat hasil errornya
+Lakukan perintah `` `lynx super.franky.C05.com/rickygantengbosskuh ``` untuk melihat hasil errornya
 
 
 .                                                   
