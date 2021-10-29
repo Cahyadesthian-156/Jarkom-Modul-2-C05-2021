@@ -6,111 +6,541 @@ Ricky Supriyanto (05111940000036)
 Cahyadesthian R. Widigda (05111940000156)                                   
 .                                                               
 # Praktikum Modul 2
-## 📅 24-26 September 2021
-Luffy adalah seorang yang akan jadi Raja Bajak Laut. Demi membuat Luffy menjadi Raja Bajak Laut, Nami ingin membuat sebuah peta, bantu Nami untuk membuat peta berikut:
+### 📅 24-26 September 2021            
+.                     
+## (1) Luffy adalah seorang yang akan jadi Raja Bajak Laut. Demi membuat Luffy menjadi Raja Bajak Laut, Nami ingin membuat sebuah peta, bantu Nami untuk membuat peta berikut:
 <img src="https://github.com/Cahyadesthian-156/empty/blob/main/petaluffy.png?raw=trueg" width="800">  
-EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, dan Skypie akan digunakan sebagai Web Server. Terdapat 2 Client yaitu Loguetown, dan Alabasta. Semua node terhubung pada router Foosha, sehingga dapat mengakses internet (1)        
-.                               
-## Setelah itu buat subdomain super.franky.yyy.com dengan alias www.super.franky.yyy.com yang diatur DNS nya di EniesLobby dan mengarah ke Skypie(3).
-Pada EniesLobby ```vi /etc/bind/kaizoku/franky.C05.com``` kemudian uncomment bagian
-``` 
-;ns1\tIN\tA\t192.186.2.4
-;super\tIN\tNS\tns1'
+
+## EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, dan Skypie akan digunakan sebagai Web Server. Terdapat 2 Client yaitu Loguetown, dan Alabasta. Semua node terhubung pada router Foosha, sehingga dapat mengakses internet
+
+
+### Jawab        
+Langkah pertama yang dilakukan adalah membuat peta seperti pada digambar, kemudian melakukan pengaturan IP untuk setiap nodenya terlebih dahulu, dalam hal ini, kelompok 
+C05 memiliki prefix 192.186 sehingga pengaturan nodenya                                       
+
+**Foosha**                            
 ```
-lalu comment pada bagian 
+auto eth0
+iface eth0 inet dhcp
+
+auto eth1
+iface eth1 inet static
+		address 192.186.1.1
+		netmask 255.255.255.0
+
+auto eth2
+iface eth2 inet static
+		address 192.186.2.1
+		netmask 255.255.255.0
 ```
-super\tIN\tA\t192.186.2.4\t;soal IP Skypie
+
+**Loguetown**
 ```
-sehingga ```/etc/bind/kaizoku/franky.C05.com``` seperti berikut                 
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/nomer3-1.png" width="700">                  
-kemudian untuk konfigurasi selanjutnya mengenai named.conf.local melalui
+auto eth0
+iface eth0 inet static
+		address 192.186.1.2
+		netmask 255.255.255.0
+		gateway 192.186.1.1
 ```
-zone "super.franky.C05.com" {\n\ttype master;\n\tfile "/etc/bind/kaizoku/super.franky.C05.com";\n};
-' > /etc/bind/named.conf.local
+
+**Alabasta**
 ```
+auto eth0
+iface eth0 inet static
+		address 192.186.1.3
+		netmask 255.255.255.0
+		gateway 192.186.1.1
 ```
-echo -e’;
+
+**EniesLobby**
+```
+auto eth0
+iface eth0 inet static
+	address 192.186.2.2
+	netmask 255.255.255.0
+	gateway 192.186.2.1
+```
+
+**Water7**
+```
+auto eth0
+iface eth0 inet static
+	address 192.186.2.3
+	netmask 255.255.255.0
+	gateway 192.186.2.1
+```
+
+**Skypie**
+```
+auto eth0
+iface eth0 inet static
+	address 192.186.2.4
+	netmask 255.255.255.0
+	gateway 192.186.2.1
+```
+
+
+kemudian pada Foosha
+```
+vi /root/.bashrc 
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.186.0.0/16
+```
+saat melakukan telnet akan langsung melakukan perintah yang berada di .bashrc 
+, kemudian di setiap node agar dapat terhubung ke internet, dapat dilakukan dengan mengeksekusi perintah berikut pada Foosha
+```
+cat /etc/resolv.conf
+```
+untuk mendapatkan IP(dalam kasus ini 192.168.122. ) yang kemudian diatur pada setiap node dengan perintah berikut
+```
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+```
+kemudian pada setiap node bisa dilakukan ping google.com atau apt-get update atau lainnya
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer1/alabsta-setup.png" width="400">    
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer1/enieslobby0setup.png" width="400">   
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer1/loguetown-setup.png" width="400">   
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer1/skypie-wetup.png" width="400">   
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer1/water7-setup.png" width="400">   
+.                                                                                           
+.                                                                                                         
+.                                                                                                                                                                                                     
+## (2) Luffy ingin menghubungi Franky yang berada di EniesLobby dengan denden mushi. Kalian diminta Luffy untuk membuat website utama dengan mengakses franky.yyy.com dengan alias www.franky.yyy.com pada folder kaizoku 
+
+
+### Jawab    
+
+Pada EniesLobby, Install paket yang dibutuhkan dalam proses
+```
+apt-get update
+apt-get install bind9 -y
+apt-get install sudo
+apt-get install nano
+```
+kemudian 
+```
+nano /etc/bind/named.conf.local
+```
+dan menambahkan zone seperti berikut
+```
+zone "franky.C05.com" {
+type master;
+file "/etc/bind/kaizoku/franky.C05.com";
+};
+```
+Setelah itu membuat folder franky ```mkdir /etc/bind/kaizoku```
+
+Copykan file db.local pada path /etc/bind kedalam folder kaizoku yang sudah dibuat dan ubah namanya menjadi franky.C05.com
+```
+cp /etc/bind/db.local /etc/bind/kaizoku/franky.C05.com
+```
+kemudian, masuk ke franky.C05.com ```nano /etc/bind/kaizoku/franky.C05.com```
+
+Kemudian edit file tersebut sebagai beriku dan tambahkan alias dengan record CNAME pada file tersebut:
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer2/nomer2-2.png" width="700"> 
+
+Setelah itu keluar dari file dan melakukan restart bind9 ```service bind9 restart```
+
+Langkah tersebut dimasukkan dalam script.sh dan command.sh seperti berikut:
+
+script.sh
+```
+echo 'zone "franky.C05.com" {
+    	type master;
+    	file "/etc/bind/kaizoku/franky.C05.com";
+};' > /etc/bind/named.conf.local
+echo -e ';
+; BIND data file for local loopback interface
+;
+$TTL	604800
+@\tIN\tSOA\tfranky.C05.com. root.franky.C05.com. (
+                    	2021        	; Serial
+                    	604800      	; Refresh
+                    	86400       	; Retry
+                    	2419200     	; Expire
+                    	604800 )    	; Negative Cache TTL
+;
+@      	IN      	NS     	franky.C05.com.
+@      	IN      	A        	192.186.2.2  	; IP EniestLobby
+www	IN      	CNAME          	franky.C05.com.
+ ‘> /etc/bind/kaizoku/franky.C05.com
+```			
+
+
+command.sh
+```
+mkdir /etc/bind/kaizoku
+```
+
+kemudian pada Node Client ( Loguetown dan Alabasta )
+```
+nano /etc/resolv.conf
+ ```
+Atur nameserver seperti berikut:
+```
+nameserver 192.186.2.2 ;IP EniesLobby
+```
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer2/nomer2-3.png" width="700"> 
+
+
+Masukkan perintah pada script.sh
+```
+echo 'nameserver 192.186.2.2
+nameserver 192.186.2.4
+nameserver 192.186.2.3' > /etc/resolv.conf
+```
+
+lalu melakukan percobaan ping franky.C05.com dan host -t CNAME www.franky.C05.com
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer2/nomer2-4.png" width="700">
+
+.                                         
+.                                                                                                                                 
+.                                         
+
+## (3)Setelah itu buat subdomain super.franky.yyy.com dengan alias www.super.franky.yyy.com yang diatur DNS nya di EniesLobby dan mengarah ke Skypie
+
+### Jawab
+Pada EniesLobby, buka file franky.C05.com dan edit file tersebut dan tambahkan konfigurasi subdomain untuk franky.yyy.com yaitu super.franky.yyy.com                      
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer3/nomer3-1.jpg" width="700">
+```
 $TTL 	604800
-@      	IN      	SOA  	super.franky.C05.com. root.super.franky.C05.com. (
-                            	2021102601 	; Serial
+@      	IN      	SOA  	franky.C05.com. root.franky.C05.com. (
+                    2021102601 	          ; Serial
+                        604800          	; Refresh
+                         86400           	;Retry
+                       2419200         	  ; Expire
+                        604800 )        	; Negative Cache TTL
+;
+@      		  IN      	NS           	franky.C05.com.
+@      		  IN      	A            	192.186.2.2  	; IP EniestLobby
+www    	    IN      	CNAME        	franky.C05.com.
+super  	    IN      	A            	192.186.2.4   ;IPSkypie
+@      		  IN      	A            	192.186.2.4
+```
+
+
+kemudian buat Zone baru ```nano /etc/bind/named.conf.local```                                               
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer3/nomer3-2.jpg" width="700">
+```
+zone "super.franky.C05.com" {
+        	type master;
+        	file "/etc/bind/kaizoku/super.franky.C05.com";
+};
+```
+
+Copy db.local ke folder ./kaizoku
+```
+cp /etc/bind/db.local /etc/bind/kaizoku/super.franky.C05.com
+```
+lakukan konfigurasi pada super.franky.C05.com                                         
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer3/nomer3-3.jpg" width="700">
+
+```
+$TTL 	604800
+@      	IN      	SOA  	franky.C05.com. root.franky.C05.com. (
+                            	2021102601 	      ; Serial
                             	604800          	; Refresh
-                            	86400             	;Retry
-                            	2419200        	; Expire
+                            	86400             ;Retry
+                            	2419200        	  ; Expire
                             	604800 )        	; Negative Cache TTL
 ;
-@      	IN      	NS           	super.franky.C05.com.
-@      	IN      	A            	192.186.2.4  	; IP Skypie
-www\tIN\tCNAME\tsuper.franky.C05.com.
+@      		IN      	NS           	super.franky.C05.com.
+@      		IN      	A            	192.186.2.4  	; IP Skypie
+www     	IN      	CNAME        	super.franky.C05.com.
+```
+
+Perintah tersebut dimasukkan dalam script.sh
+```
+echo -e ';
+; BIND data file for local loopback interface
+;
+$TTL	604800
+@\tIN\tSOA\tfranky.C05.com. root.franky.C05.com. (
+                    	2021        	; Serial
+                    	604800      	; Refresh
+                    	86400       	; Retry
+                    	2419200     	; Expire
+                    	604800 )    	; Negative Cache TTL
+;
+@           	IN  	NS          	franky.C05.com.
+@           	IN  	A           	192.186.2.2         	;IP EinesLobby
+www         	IN  	CNAME       	franky.C05.com.     	;CNAME Buat Alias
+ns1         	IN  	A           	192.186.2.4         	;IP Skypie
+super       	IN  	NS          	ns1
+ns2         	IN  	A           	192.186.2.3         	; IP Water7
+mecha       	IN  	NS          	ns2' > /etc/bind/kaizoku/franky.C05.com
+```
+
+```
+echo 'zone "franky.C05.com" {
+    	type master;
+    	notify yes;
+    	also-notify { 192.186.2.3; };
+    	allow-transfer { 192.186.2.3; };
+    	file "/etc/bind/kaizoku/franky.C05.com";
+};
+zone "super.franky.C05.com" {
+    	type master;
+    	file "/etc/bind/kaizoku/super.franky.C05.com";
+
+};’>  /etc/bind/named.conf.local
+```
+
+```
+echo -e ';
+$TTL	604800
+@   	IN          	SOA 	super.franky.C05.com. root.super.franky.C05.com. (
+                            	2021102601  	; Serial
+                            	604800      	; Refresh
+                            	86400       	;Retry
+                            	2419200     	; Expire
+                            	604800 )    	; Negative Cache TTL
+;
+@   	IN          	NS          	super.franky.C05.com.
+@   	IN          	A           	192.186.2.4 	; IP Skypie
+www 	IN          	CNAME       	super.franky.C05.com.
 ' > /etc/bind/kaizoku/super.franky.C05.com
 ```
-kemudian melakukan restart bind9
-```
-service bind9 restart
-```
-setelah itu cek melalui client dengan cara melakukan ping terhadap host
-```host -t CNAME super.franky.C05.com```dan ```ping www.super.franky.C05.com```                                                     
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/nomer3-2.png" width="700">                                                               
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/nomer3-3.png" width="700">    
-                                                                        
-## Buat juga reverse domain untuk domain utama (4).                                                             
-```zone "2.186.192.in-addr.arpa" {\n\ttype master;\n\tfile "/etc/bind/kaizoku/2.186.192.in-addr.arpa";\n}; >/etc/bind/named.conf.local```                                   
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/nomer4-1.png" width="700">  
-```echo -e’$TTL 	604800
-@      	IN      	SOA  	franky.C05.com. root.franky.C05.com. (
-2021102601 	; Serial
-604800          	; Refresh
-86400             	;Retry
-2419200        	; Expire
-604800 )        	; Negative Cache TTL
-;
-2.186.192.in-addr.arpa.\tIN\tNS\tfranky.C05.com.\n
-2\tIN\tPTR\tfranky.C05.com.’ >/etc/bind/kaizoku/2.186.192.in-addr.arpa
-```
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/nomer4-2.png" width="700">  
-kemudian restart bind9 ```service bind9 restart``` lali melakukan cek pada client 
-```host -t PTR 192.186.2.2```
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/nomer4-3.png" width="700">  
-                                                                
-## Supaya tetap bisa menghubungi Franky jika server EniesLobby rusak, maka buat Water7 sebagai DNS Slave untuk domain utama (5).
-Pada EniesLobby menuliskan IP Water7
-```
-echo -e’;
-zone "franky.C05.com" {\n\t
-            type master;\n\t
-            notify yes;\n\t
-            also-notify { 192.186.2.3; };\n\t
-            allow-transfer { 192.186.2.3; };\n\t
-            file "/etc/bind/kaizoku/franky.C05.com";\n\t
-   }; > /etc/bind/named.conf.local
-```                                                                                             
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/nomer5-1.png" width="700">  
 
-kemudian pada Water7 di (/root/.bashrc)
+Kemudian restart bind9 dengan perintah ```service bind9 restart```
+
+
+Pada node client (Loguetown dan Alabasta), arahkan nameserver menuju IP Skypie dengan mengedit file resolv.conf dengan mengetikkan perintah ```nano /etc/resolv.conf``` lalu tambahkan
+
+```
+nameserver 192.186.2.2
+nameserver 192.186.2.4
+```                                                                                           
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer3/nomer3-4.jpg" width="700">       
+
+kemudian lakukan ping pada super.franky.C05.com dan www.super.franky.C05.com atau host -t CNAME www.super.franky.C05.com dan www.super.franky.C05.com                     
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer3/nomer3-5.jpg" width="700">                         
+.                                                                                         
+.                                                                            
+.                             
+## (4) Buat juga reverse domain untuk domain utama 
+
+
+### Jawab
+Pada EniesLobby, edit file /etc/bind/named.conf.local ```nano /etc/bind/named.conf.local```
+tambahkan
+```
+zone "2.186.192.in-addr.arpa" {
+type master;
+file "/etc/bind/kaizoku/2.186.192.in-addr.arpa";
+};
+```
+sehingga zone menjadi                                                 
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer4/nomer4-1.jpg" width="700">
+
+
+kemudian copy file db.local pada path /etc/bind ke dalam folder kaizoku yang baru saja dibuat dan ubah namanya menjadi 2.186.192.in-addr.arpa
+
+```
+cp /etc/bind/db.local /etc/bind/kaizoku/2.186.192.in-addr.arpa
+```
+
+
+lalu edit file 2.186.192.in-addr.arpa                                                               
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer4/nomer4-2.jpg" width="700"> 
+
+
+Perintah tersebut dimasukkan dalam script.sh
+
+```
+echo 'zone "franky.C05.com" {
+        type master;
+        notify yes;
+        also-notify { 192.186.2.3; };
+        allow-transfer { 192.186.2.3; };
+        file "/etc/bind/kaizoku/franky.C05.com";
+};
+zone "super.franky.C05.com" {
+        type master;
+        file "/etc/bind/kaizoku/super.franky.C05.com";
+};
+zone "2.186.192.in-addr.arpa" {
+        type master;
+        file "/etc/bind/kaizoku/2.186.192.in-addr.arpa";
+};' > /etc/bind/named.conf.local
+```
+
+
+```
+echo -e ';
+$TTL	604800
+@   	IN  	SOA 	franky.C05.com. root.franky.C05.com. (
+                    	2021102601          	; Serial
+                    	604800              	; Refresh
+                    	86400               	;Retry
+                    	2419200             	; Expire
+                    	604800 )            	; Negative Cache TTL
+;
+2.186.192.in-addr.arpa.     	IN  	NS  	franky.C05.com.
+2                           	IN  	PTR 	franky.C05.com. '>/etc/bind/kaizoku/2.186.192.in-addr.arpa
+```
+
+
+Kemudian restart bind9 dengan perintah ```service bind9 restart```
+
+setelah itu pada node client (Loguetown dan Alabasta) cek dengan melakukan 
+```host -t PTR 192.186.2.2```
+
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer4/nomer4-3.jpg" width="700">     
+
+.                                                                                         
+.                                                                                                           
+.                                                                       
+## (5)Supaya tetap bisa menghubungi Franky jika server EniesLobby rusak, maka buat Water7 sebagai DNS Slave untuk domain utama 
+
+### Jawab
+
+Pada EniesLobby, lakukan ```nano /etc/bind/named.conf.local```
+lalu ubah seperti pada bagian berikut
+
+```
+zone "franky.C05.com" {
+            type master;
+            notify yes;
+            also-notify { 192.186.2.3; };
+            allow-transfer { 192.186.2.3; };
+            file "/etc/bind/kaizoku/franky.C05.com";
+}; 
+```                                                                                                                              
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer5/nomer5-1.jpg" width="700">   
+
+
+
+Pada Water7
+Masukkan command dan install paket yang dibutuhkan dan perintah tersebut di masukkan dalam /root/.bashrc:
+
 ```
 echo nameserver 192.168.122.1 > /etc/resolv.conf
 apt-get update
 apt-get install bind9 -y
-```                                                                     
-lalu di water7 (/root/script.sh)                                                            
-```
-echo -e’
-zone "franky.C05.com" {\n\t
-        type slave;\n\t
-        masters { 192.186.2.2; };\n\t
-        file "/var/lib/bind/franky.C05.com";\n\t
-    };’ > /etc/bind/named.conf.local
 ```
 
-kemudian melakukan restart bind9 ```service bind9 restart```                                                     
-dan pada server EniesLobby mematikan service bind9 ```service bind9 stop```                                                         
-setelah itu untuk mencoba pada Loguetown ditambahkan ip water 7                                                                                           
+Kemudian berikan pengaturan Slave di ```/etc/bind/named.conf.local```
+
 ```
-echo -e 'nameserver 192.186.2.2
-nameserver 192.186.2.4
-nameserver 192.186.2.3' > /etc/resolv.conf
+zone "franky.C05.com" {
+        type slave;
+        masters { 192.186.2.2; };
+        file "/var/lib/bind/franky.C05.com";
+ }; 
+```                                                                       
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer5/nomer5-2.jpg" width="700">   
+
+
+Perintah tersebut dimasukkan dalam script.sh
 ```
-Lalu ping franky.C05.com                                                                    
-<img src="https://github.com/Cahyadesthian-156/empty/blob/main/nomer5-2.png" width="500">  
+echo -e '
+zone "franky.C05.com" {
+    	type slave;
+    	masters { 192.186.2.2; };
+    	file "/var/lib/bind/franky.C05.com";
+};' > /etc/bind/named.conf.local
+```
+
+kemudian restart bind9 ```service bind9 restart```
+
+setelah itu pada Loguetown dan Alabasta tambahkan IP Water7 sehingga nampak seperti                                       
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer5/nomer5-3.jpg" width="700">   
+
+Untuk melakukan cek keberhasilan konfigurasi, matikan bind9 yang ada pada EniesLobby dengan command:
+``service bind9 stop```
+
+lalu di node client (Loguetown dan Alabasta) lakukan ping franky.C05.com                                            
+<img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer5/nomer5-4.jpg" width="700">   
+.                                                   
+.                                                                 
+.   
+
+## (6) Setelah itu terdapat subdomain mecha.franky.yyy.com dengan alias www.mecha.franky.yyy.com yang didelegasikan dari EniesLobby ke Water7 dengan IP menuju ke Skypie dalam folder sunnygo
+
+### Jawab
+Pada EniesLobby, edit file /etc/bind/kaizoku/franky.C05.com
+
+```
+$TTL 	604800
+@      	IN      	SOA  	franky.C05.com. root.franky.C05.com. (
+              2021102601 		        ; Serial
+                  604800          	; Refresh
+                   86400           	;Retry
+                 2419200           	; Expire
+                  604800 )        	; Negative Cache TTL
+;
+@     	 	  IN      	NS     	    franky.C05.com.
+@      		  IN      	A			      192.186.2.2  	; IP EniestLobby
+www		      IN      	CNAME       franky.C05.com.
+super		    IN	      A			      192.186.2.4 	;IP Skypie
+ns1		      IN	      A			      192.186.2.4
+mecha	      IN	      NS			    ns1
+www.mecha	  IN	      CNAME		    192.186.2.4
+```
+
+Edit file /etc/bind/named.conf.options dengan comment bagian 
+```‘dnssec-validation auto;’``` dan menambahkan 
+```
+`allow-query{any;};
+```
+
+kemudian pada /etc/bind/named.conf.local, edit sebagai berikut
+
+```
+zone "franky.C05.com" {
+            type master;
+            notify yes;
+            also-notify { 192.186.2.3; };
+            allow-transfer { 192.186.2.3; }; 
+            file "/etc/bind/kaizoku/franky.C05.com";
+}; 
+```
+
+Pada Water7, di /etc/bind/named.conf.local
+
+```
+zone "mecha.franky.C05.com" {\n\t
+            	type master;\n\t
+            	file "/etc/bind/sunnygo/mecha.franky.C05.com";\n\t
+}
+```
+
+Lalu mkdir /etc/bind/sunnygo
+
+Setelah iitu membuat file pada directory /etc/bind/sunnygo/mecha.franky.C05.com dengan isi :
+
+```
+$TTL 	604800
+@      	IN      	SOA  	mecha.franky.C05.com. root.mecha.franky.C05.com. (
+                  2021102601 	          ; Serial
+                      604800          	; Refresh
+                       86400           	; Retry
+                     2419200          	; Expire
+                      604800 )        	; Negative Cache TTL
+;
+@      		IN      	NS     		  mecha.franky.C05.com.
+@      		IN      	A        		192.186.2.4  	; IP Skypie
+general	  IN	      A		        192.186.2.4
+www		    IN	      CNAME	      mecha.franky.C05.com.
+```
+
+kemudian pada node client ( Loguetown dan Alabasta ) dapat dilakukan ```ping mecha.franky.C05.com```  dan  ```ping www.mecha.franky.C05.com```
+
+.                         
+.                         
+.                                                                   
+## (7)Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Water7 dengan nama general.mecha.franky.yyy.com dengan alias www.general.mecha.franky.yyy.com yang mengarah ke Skypie
+
+### Jawab
+
+
+
+
+
+
+
+
+.                               
+
 
 ## Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache 
 **Pada router Skypie**
