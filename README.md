@@ -114,6 +114,7 @@ Lalu ping franky.C05.com
 
 ## Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache 
 **Pada router Skypie**
+
 Edit file `super.franky.C05.com.conf`pada directory `/etc/apache2/sites-available` dan tambahkan 
 ``` 
     ErrorDocument 404 /error/404.html
@@ -130,6 +131,7 @@ Lakukan perintah ```lynx super.franky.C05.com/rickygantengbosskuh ``` untuk meli
 
 ## Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.yyy.com/public/js menjadi www.super.franky.yyy.com/js
 **Pada router Skypie**
+
 Edit file `super.franky.C05.com.conf` pada directory `/etc/apache2/sites-available` dan tambahkan
 ```Alias "/js" "/var/www/super.franky.C05.com/public/js"```
 Lakukan ```a2ensite super.franky.C05.com.conf```
@@ -140,6 +142,7 @@ Lakukan perintah ```lynx super.franky.C05.com/js ``` untuk melihat hasilnya
 
 ## Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
 **Pada router Skypie**
+
 Pada command.sh beri perintah berikut, dengan langkah membuat directory terlebih dahulu, setelah itu mendownload file zip dan meng unzip file tersebut.Lalu dilakukan pemindahan data dari super.franky ke super.franky.C05.com. Setelah itu lakukan copy pada 000-default.conf 
 ```
 mkdir /var/www/general.mecha.franky.C05.com
@@ -191,18 +194,19 @@ Listen 15500
 Jalankan perintah a2ensite general.mecha.franky.C05.com.conf
 Kemudian restrart dengan perintah ``` service apache2 restart ```
 
-Pada EniesLobby
+**Pada EniesLobby**
 
 Lakukan konfigurasi pada zone general.mecha.franky.C05.com
 
 Lakukan restart bind9 dengan perintah `Service bind9 restart`
 
-Pada Loguetown dan Alabasta 
+**Pada Loguetown dan Alabasta **
 
 Jalankan perintah`lynx general.mecha.franky.C05.com :15000`
 
 ## dengan authentikasi username luffy dan password onepiece dan file di /var/www/general.mecha.franky.yyy
 **Pada router Skypie**
+
 Buat username (luffy) dan password dengan menginputkan comment `htpasswd -c /etc/apache2/.htpasswd luffy` Kemudian isi password sesuai kiteria (onepiece)
 
 Buat file `.htaccess` pada `/var/www/general.mecha.franky.C05.com/.htaccess` dan edit file `.htaccess` seperti:
@@ -225,6 +229,7 @@ Kemudian restrart dengan perintah ``` service apache2 restart ```
 Jalankan perintah `lynx general.mecha.franky.C05.com :15000`
 ## Dan setiap kali mengakses IP Skypie akan diahlikan secara otomatis ke www.franky.yyy.com
 **Pada Skypie**
+
 Buat file `.htacces` pada directory `/var/www/html` dan edit sebagai berikut
 ```
 echo '
@@ -244,6 +249,7 @@ Kemudian, edit file `/000-default.conf`  pada directory `/etc/apache2/sites-avai
 Kemudian restrart dengan perintah ``` service apache2 restart ```
 
 **Pada EniesLobby**
+
 Lakukan konfigurasi pada zone franky.C05.com
 
 Lakukan restart bind9 dengan perintah `Service bind9 restart`
