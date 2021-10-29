@@ -119,7 +119,7 @@ Pada router Skypie Edit file super.franky.C05.com.conf dengan menambahkan
     <If "-z %{ENV:REDIRECT_STATUS}">
           RedirectMatch 404 /error/404.html$
     </If>
-    </Files>```
+    </Files> ```
 Lakukan ```a2ensite super.franky.C05.com.conf```
 Kemudian restrart dengan perintah ```service apache2 restart```
 Pada Loguetown dan Alabasta
