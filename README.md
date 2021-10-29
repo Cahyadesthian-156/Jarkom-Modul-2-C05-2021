@@ -190,9 +190,10 @@ Lakukan a2ensite general.mecha.franky.C05.com.conf
 Kemudian restrart dengan perintah ``` service apache2 restart ```
 
 Pada EniesLobby
+
 Lakukan konfigurasi pada zone general.mecha.franky.C05.com
-Lakukan restart bind9
-`Service bind9 restart`
+
+Lakukan restart bind9 dengan perintah `Service bind9 restart`
 
 Pada Loguetown dan Alabasta jalankan perintah
 `lynx general.mecha.franky.C05.com :15000`
@@ -240,9 +241,10 @@ Kemudian, edit file `/000-default.conf`  pada directory `/etc/apache2/sites-avai
 Kemudian restrart dengan perintah ``` service apache2 restart ```
 
 Pada EniesLobby
-Lakukan konfigurasi pada zone .franky.C05.com
-Lakukan restart bind9
-`Service bind9 restart`
+
+Lakukan konfigurasi pada zone franky.C05.com
+
+Lakukan restart bind9 dengan perintah `Service bind9 restart`
 
 Pada Loguetown dan Alabasta
 Jalankan perintah `lynx 192.186.2.4`
@@ -268,10 +270,11 @@ Jalankan perintah `a2ensite super.franky.C05.com.conf`
 Kemudian restrart dengan perintah ``` service apache2 restart ```
 
 Pada EniesLobby
+
 Lakukan konfigurasi pada zone super.franky.C05.com
-Lakukan restart bind9
-`Service bind9 restart`
+
+Lakukan restart bind9 dengan perintah `Service bind9 restart`
 
 Pada Loguetown dan Alabasta
-Lakukan command 
-`lynx http://super.franky.C05.com/public/images/franky.png`
+
+Jalankan command `lynx http://super.franky.C05.com/public/images/franky.png`
