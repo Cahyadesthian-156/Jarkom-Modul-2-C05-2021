@@ -122,7 +122,6 @@ Pada router Skypie, Edit file `super.franky.C05.com.conf`pada directory `/etc/ap
     </If>
     </Files> 
 ```
-Lakukan ``` a2ensite super.franky.C05.com.conf ```
 Kemudian restrart dengan perintah ``` service apache2 restart ```
 Pada Loguetown dan Alabasta
 Lakukan perintah ```lynx super.franky.C05.com/rickygantengbosskuh ``` untuk melihat hasil errornya
@@ -186,7 +185,7 @@ Listen 15500
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet' >  /etc/apache2/ports.conf
 ```
-Lakukan a2ensite general.mecha.franky.C05.com.conf
+Jalankan perintah a2ensite general.mecha.franky.C05.com.conf
 Kemudian restrart dengan perintah ``` service apache2 restart ```
 
 Pada EniesLobby
@@ -210,13 +209,11 @@ Require valid-user' > /var/www/general.mecha.franky.C05.com/.htaccess
 
 Edit file general.mecha.franky.C05.com.conf pada directory /etc/apache2/sites-available/general.mecha.franky.C05.com.conf dengan menambahkan:
 ```
-      <Directory /var/www/general.mecha.franky.C05.com>
-            	Options +FollowSymLinks -Multiviews
-            	AllowOverride All
-    	</Directory>
+<Directory /var/www/general.mecha.franky.C05.com>
+      Options +FollowSymLinks -Multiviews
+      AllowOverride All
+</Directory>
 ```
-
-Lakukan a2ensite general.mecha.franky.C05.com.conf
 Kemudian restrart dengan perintah ``` service apache2 restart ```
 
 Pada Loguetown dan Alabasta jalankan perintah
@@ -227,16 +224,16 @@ Buat file `.htacces` pada directory `/var/www/html` dan edit sebagai berikut
 ```
 echo '
 RewriteEngine On
-	RewriteBase /
-	RewriteCond %{HTTP_HOST} ^192\.186\.2\.4$
-	RewriteRule ^(.*)$ http://www.franky.C05.com [L,R=301] ' > /var/www/html/.htaccess
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^192\.186\.2\.4$
+RewriteRule ^(.*)$ http://www.franky.C05.com [L,R=301] ' > /var/www/html/.htaccess
 ```
 Kemudian, edit file `/000-default.conf`  pada directory `/etc/apache2/sites-available` dengan menambahkan:
 ```
-    <Directory /var/www/html>
-        Options +FollowSymLinks -Multiviews
-        AllowOverride All
-    </Directory>
+<Directory /var/www/html>
+     Options +FollowSymLinks -Multiviews
+     AllowOverride All
+</Directory>
 ```
 Kemudian restrart dengan perintah ``` service apache2 restart ```
 
@@ -253,10 +250,10 @@ Jalankan perintah `lynx 192.186.2.4`
 Pada Skypie
 Edit file pada `super.franky.C05.com.conf` pada directory `/etc/apache2/sites-available/` dengan menambahkan:
  ```
- 	<Directory /var/www/super.franky.C05.com>
-            	Options +FollowSymLinks -Multiviews
-            	AllowOverride All
-    	</Directory>
+ <Directory /var/www/super.franky.C05.com>
+       Options +FollowSymLinks -Multiviews
+       AllowOverride All
+</Directory>
 ```	
 Buat file dan `edit /.htaccess` pada directory `/var/www/super.franky.C05.com/` dengan perintah
 ```
