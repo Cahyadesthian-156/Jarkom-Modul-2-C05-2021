@@ -247,8 +247,31 @@ Lakukan restart bind9
 Pada Loguetown dan Alabasta
 Jalankan perintah `lynx 192.186.2.4`
 
+## Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melalui website www.super.franky.yyy.com, dan dikarenakan pengunjung web server pasti akan bingung dengan randomnya images yang ada, maka Franky juga meminta untuk mengganti request gambar yang memiliki substring “franky” akan diarahkan menuju franky.png. Maka bantulah Luffy untuk membuat konfigurasi dns dan web server ini!
+Pada Skypie
+Edit file pada `super.franky.C05.com.conf` pada directory `/etc/apache2/sites-available/` dengan menambahkan:
+ ```
+ 	<Directory /var/www/super.franky.C05.com>
+            	Options +FollowSymLinks -Multiviews
+            	AllowOverride All
+    	</Directory>
+```	
+Buat file dan `edit /.htaccess` pada directory `/var/www/super.franky.C05.com/` dengan perintah
+```
+echo 'RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)franky(.*)\.(jpg|gif|png)$ http://super.franky.C05.com/public/images/franky.png [L,R]
+' > /var/www/super.franky.C05.com/.htaccess
+```                                                   
+Jalankan perintah `a2ensite super.franky.C05.com.conf`
+Kemudian restrart dengan perintah ``` service apache2 restart ```
 
+Pada EniesLobby
+Lakukan konfigurasi pada zone super.franky.C05.com
+Lakukan restart bind9
+`Service bind9 restart`
 
-
-
-.                                                   
+Pada Loguetown dan Alabasta
+Lakukan command 
+`lynx http://super.franky.C05.com/public/images/franky.png`
