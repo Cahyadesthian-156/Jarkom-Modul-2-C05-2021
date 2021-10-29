@@ -523,11 +523,12 @@ www		IN	      	CNAME		      	mecha.franky.C05.com.
 
 kemudian pada node client ( Loguetown dan Alabasta ) dapat dilakukan ```ping mecha.franky.C05.com```  dan  ```ping www.mecha.franky.C05.com```					
 
-
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer6/nomer6-7.jpg" width="700">   						
-.                         
-.                         
-.                                                                   
+.         												                
+.                				         
+.               					
+
+
 ## (7)Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Water7 dengan nama general.mecha.franky.yyy.com dengan alias www.general.mecha.franky.yyy.com yang mengarah ke Skypie
 
 ### Jawab
