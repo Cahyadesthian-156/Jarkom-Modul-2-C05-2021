@@ -149,7 +149,8 @@ mv general.mecha.franky/f1.png /var/www/general.mecha.franky.C05.com
 mv general.mecha.franky/funko-pop.jpg /var/www/general.mecha.franky.C05.com
 cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/general.mecha.franky.C05.com.conf
 ```
-Pada router Skypie, Edit file general-script.sh untuk directory /etc/apache2/sites-available/general.mecha.franky.C05.com.conf
+Pada router Skypie
+Edit file general-script.sh untuk directory /etc/apache2/sites-available/general.mecha.franky.C05.com.conf
 ```
       echo '<VirtualHost *:15000 *:15500>
     	ServerAdmin webmaster@localhost
@@ -161,9 +162,93 @@ Pada router Skypie, Edit file general-script.sh untuk directory /etc/apache2/sit
             	Options +FollowSymLinks -Multiviews
             	AllowOverride All
     	</Directory>
- ErrorLog ${APACHE_LOG_DIR}/error.log
- CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>' > /etc/apache2/sites-available/general.mecha.franky.C05.com.conf
+      ErrorLog ${APACHE_LOG_DIR}/error.log
+      CustomLog ${APACHE_LOG_DIR}/access.log combined
+      </VirtualHost>' > /etc/apache2/sites-available/general.mecha.franky.C05.com.conf
 ```
+Edit file ports.conf dengan menambahakan port `15000` dan `15500` pada directory `/etc/apache2/ports.conf`
+echo '
+```
+# If you just change the port or add more ports here,  will likely also
+# have to change the VirtualHost statement in
+# /etc/apache2/sites-enabled/000-default.conf
+Listen 80
+Listen 15000
+Listen 15500
+
+<IfModule ssl_module>
+    	Listen 443
+</IfModule>
+
+<IfModule mod_gnutls.c>
+    	Listen 443
+</IfModule>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet' >  /etc/apache2/ports.conf
+```
+Lakukan a2ensite general.mecha.franky.C05.com.conf
+Kemudian restrart dengan perintah ``` service apache2 restart ```
+
+Pada EniesLobby
+Lakukan konfigurasi pada zone general.mecha.franky.C05.com
+Lakukan restart bind9
+`Service bind9 restart`
+
+Pada Loguetown dan Alabasta jalankan perintah
+`lynx general.mecha.franky.C05.com :15000`
+
+## dengan authentikasi username luffy dan password onepiece dan file di /var/www/general.mecha.franky.yyy
+Buat username (luffy) dan password dengan menginputkan comment `htpasswd -c /etc/apache2/.htpasswd luffy` Kemudian isi password sesuai kiteria (onepiece)
+
+Buat file `.htaccess` pada `/var/www/general.mecha.franky.C05.com/.htaccess` dan edit file `.htaccess` seperti:
+
+echo 'AuthType Basic
+AuthName "Restricted Content"
+AuthUserFile /etc/apache2/.htpasswd
+Require valid-user' > /var/www/general.mecha.franky.C05.com/.htaccess
+
+Edit file general.mecha.franky.C05.com.conf pada directory /etc/apache2/sites-available/general.mecha.franky.C05.com.conf dengan menambahkan:
+```
+      <Directory /var/www/general.mecha.franky.C05.com>
+            	Options +FollowSymLinks -Multiviews
+            	AllowOverride All
+    	</Directory>
+```
+
+Lakukan a2ensite general.mecha.franky.C05.com.conf
+Kemudian restrart dengan perintah ``` service apache2 restart ```
+
+Pada Loguetown dan Alabasta jalankan perintah
+`lynx general.mecha.franky.C05.com :15000`
+## Dan setiap kali mengakses IP Skypie akan diahlikan secara otomatis ke www.franky.yyy.com
+Pada Skypie
+Buat file `.htacces` pada directory `/var/www/html` dan edit sebagai berikut
+```
+echo '
+RewriteEngine On
+	RewriteBase /
+	RewriteCond %{HTTP_HOST} ^192\.186\.2\.4$
+	RewriteRule ^(.*)$ http://www.franky.C05.com [L,R=301] ' > /var/www/html/.htaccess
+```
+Kemudian, edit file `/000-default.conf`  pada directory `/etc/apache2/sites-available` dengan menambahkan:
+```
+    <Directory /var/www/html>
+        Options +FollowSymLinks -Multiviews
+        AllowOverride All
+    </Directory>
+```
+Kemudian restrart dengan perintah ``` service apache2 restart ```
+
+Pada EniesLobby
+Lakukan konfigurasi pada zone .franky.C05.com
+Lakukan restart bind9
+`Service bind9 restart`
+
+Pada Loguetown dan Alabasta
+Jalankan perintah `lynx 192.186.2.4`
+
+
+
+
 
 .                                                   
