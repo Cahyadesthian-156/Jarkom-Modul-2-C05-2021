@@ -125,7 +125,7 @@ Pada router Skypie Edit file super.franky.C05.com.conf dengan menambahkan
 Lakukan ``` a2ensite super.franky.C05.com.conf ```
 Kemudian restrart dengan perintah ``` service apache2 restart ```
 Pada Loguetown dan Alabasta
-Lakukan perintah `` `lynx super.franky.C05.com/rickygantengbosskuh ``` untuk melihat hasil errornya
+Lakukan perintah ```lynx super.franky.C05.com/rickygantengbosskuh ``` untuk melihat hasil errornya
 
 
 .                                                   
