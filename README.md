@@ -566,6 +566,8 @@ mv franky/home.html /var/www/franky.C05.com
 mv franky/index.php /var/www/franky.C05.com
 cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/franky.C05.com.conf
 ```
+Pada directory `/etc/apache2/sites-available` lakukan perintah `a2ensite franky.C05.com.conf`
+Kemudian restart dengan perintah `service apache2 restart`
 **Pada EniesLobby**
 
 Lakukan konfigurasi pada zone `franky.C05.com`
@@ -573,8 +575,24 @@ Lakukan konfigurasi pada zone `franky.C05.com`
 Lakukan restart bind9 dengan perintah `Service bind9 restart`
 
 **Pada Loguetown dan Alabasta**
+
 Lakukan instalasi pada lynx dengan mengetikkan perintah `apt-get install lynx -y`
+
 Lalu jalankan perintah `lynx franky.C05.com`
+
+## Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home dapat menjadi menjadi www.franky.yyy.com/home. 
+### Jawab
+** Pada Skypie**
+Edit file `franky.C05.com.conf` pada directory `/etc/apache2/sites-available` dan tambahkan 
+```
+<Directory /var/www/franky.C05.com>
+Options Indexes +FollowSymLinks -MultiViews
+AllowOverride All
+</Directory>
+```
+Lalu lalukan perintah `a2enmod rewrite`
+
+
 
 ## Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache 
 **Pada router Skypie**
@@ -588,7 +606,7 @@ Edit file `super.franky.C05.com.conf`pada directory `/etc/apache2/sites-availabl
     </If>
     </Files> 
 ```
-Kemudian restrart dengan perintah ``` service apache2 restart ```
+Kemudian restart dengan perintah `service apache2 restart`
 **Pada Loguetown dan Alabasta**
 
 Lakukan perintah ```lynx super.franky.C05.com/rickygantengbosskuh ``` untuk melihat hasil errornya
@@ -655,8 +673,8 @@ Listen 15500
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet' >  /etc/apache2/ports.conf
 ```
-Jalankan perintah a2ensite general.mecha.franky.C05.com.conf
-Kemudian restrart dengan perintah ``` service apache2 restart ```
+Jalankan perintah `a2ensite general.mecha.franky.C05.com.conf`
+Kemudian restart dengan perintah ` service apache2 restart `
 
 **Pada EniesLobby**
 
@@ -687,7 +705,7 @@ Edit file general.mecha.franky.C05.com.conf pada directory /etc/apache2/sites-av
       AllowOverride All
 </Directory>
 ```
-Kemudian restrart dengan perintah ``` service apache2 restart ```
+Kemudian restart dengan perintah `service apache2 restart`
 
 **Pada Loguetown dan Alabasta**
 Jalankan perintah `lynx general.mecha.franky.C05.com :15000`
@@ -710,7 +728,7 @@ Kemudian, edit file `/000-default.conf`  pada directory `/etc/apache2/sites-avai
      AllowOverride All
 </Directory>
 ```
-Kemudian restrart dengan perintah ``` service apache2 restart ```
+Kemudian restrart dengan perintah `service apache2 restart`
 
 **Pada EniesLobby**
 
@@ -740,7 +758,7 @@ RewriteRule ^(.*)franky(.*)\.(jpg|gif|png)$ http://super.franky.C05.com/public/i
 ' > /var/www/super.franky.C05.com/.htaccess
 ```                                                   
 Jalankan perintah `a2ensite super.franky.C05.com.conf`
-Kemudian restrart dengan perintah ` service apache2 restart `
+Kemudian restart dengan perintah ` service apache2 restart `
 
 **Pada EniesLobby**
 
