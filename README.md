@@ -1087,3 +1087,10 @@ Lakukan restart bind9 dengan perintah `Service bind9 restart`
 
 Jalankan command `lynx http://super.franky.C05.com/public/images/franky.png` dan berikut hasilnya:
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer17/no.17.png" width="700">
+
+
+### Kendala Praktikum:
+
+-> Pada persoalan no.8, 9, 10, 11, 12 (Saat melakukan lynx tidak mengeluarkan apa apa/ mengarah ke mercusuar.com)
+
+-> Pada persoalan no.16(IP skypie tidak mengarah ke www.franky.yyy.com)
