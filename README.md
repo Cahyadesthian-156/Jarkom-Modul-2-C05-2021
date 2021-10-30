@@ -848,6 +848,7 @@ ServerAdmin webmaster@localhost
 </VirtualHost>' > /etc/apache2/sites-available/super.franky.C05.com.conf
 ```
 Lakukan `a2ensite super.franky.C05.com.conf`
+
 Lakukan perintah `service apache2 restart`
 
 **Pada Loguetown dan Alabasta**
@@ -873,6 +874,7 @@ Edit file `super.franky.C05.com.conf`pada directory `/etc/apache2/sites-availabl
     </Files> 
 ```
 Kemudian restart dengan perintah `service apache2 restart`
+
 **Pada Loguetown dan Alabasta**
 
 .
