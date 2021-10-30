@@ -748,7 +748,9 @@ Lalu jalankan perintah `lynx franky.C05.com` Hasil nya :
 ## 9. Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home dapat menjadi menjadi www.franky.yyy.com/home. 
 ### Jawab
 **Pada Skypie**
+
 .
+
 Edit file `franky.C05.com.conf` pada directory `/etc/apache2/sites-available` dan tambahkan 
 ```
 <Directory /var/www/franky.C05.com>
@@ -769,7 +771,9 @@ Lalu lalukan perintah `a2enmod rewrite`
 Lakukan restart dengan `service apache2 restart`
 
 **Pada Loguetown dan Alabasta**
+
 .
+
 Lakukan lynx franky.C05.com/home
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer9/no.9.png" width="700">
 
