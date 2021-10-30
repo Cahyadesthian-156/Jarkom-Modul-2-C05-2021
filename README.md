@@ -553,7 +553,9 @@ Dapat dilakukan ```ping mecha.franky.C05.com```  dan  ```ping www.mecha.franky.C
 
 ### Jawab
 **Pada water7**
+
 .
+
 Pergi ke directory `/etc/bind/sunnygo/mecha.franky.C05.com` den edit:
 ```
 $TTL     604800
@@ -638,10 +640,13 @@ Setelah itu lakukan :
 `service bind9 restart`
 
 **Pada Loguetown**
+
 .
+
 Lakukan ping general.mecha.franky.C05.com dan host -t CNAME www.general.mecha.franky.C05.com
 Hasil nya seperti berikut:
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer7/no.7.png" width="700">
+
 .
 .
 .
@@ -650,7 +655,9 @@ Hasil nya seperti berikut:
 
 ### Jawab
 **Pada Skypie**
+
 .
+
 Install paket yang diperlukan terlebih dahulu (Masukkan pada /root/.bashrc) dan jalankan (bash /root/.bashrc)
 ```
 echo nameserver 192.168.122.1 > /etc/resolv.conf
@@ -688,17 +695,26 @@ Pada directory `/etc/apache2/sites-available` lakukan perintah `a2ensite franky.
 Kemudian restart dengan perintah `service apache2 restart`
 
 **Pada EniesLobby**
+
 .
+
 Lakukan konfigurasi pada zone `franky.C05.com` pada kasus ini konfigurasi franky.C05.com sudah kami buat dalam `webserver.sh` dan hanya perlu melakukan bash.
+
 .
+
 Setelah itu lakukan restart bind9 dengan perintah `Service bind9 restart`
 
 **Pada Loguetown dan Alabasta**
+
 .
+
 Lakukan instalasi pada lynx dengan mengetikkan perintah `apt-get install lynx -y` (masukkan dalam dalam /root/.bashrc)
+
 .
+
 Lalu jalankan perintah `lynx franky.C05.com` Hasil nya :
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer8/no.8.png" width="700">
+
 .
 .
 .
@@ -734,8 +750,87 @@ Lakukan lynx franky.C05.com/home
 
 ## 10. Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpanan aset yang memiliki DocumentRoot pada /var/www/super.franky.yyy.com 
 
+### Jawab
+**Pada Skypie**
+
+.
+
+Pada command.sh beri perintah berikut, dengan langkah membuat directory terlebih dahulu, setelah itu mendownload file zip dan meng unzip file tersebut.Lalu dilakukan pemindahan data dari super.franky ke super.franky.C05.com. Setelah itu lakukan copy pada 000-default.conf 
+```
+mkdir /var/www/super.franky.C05.com
+wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/super.franky.zip
+unzip super.franky.zip
+
+mv super.franky/error /var/www/super.franky.C05.com
+mv super.franky/public /var/www/super.franky.C05.com
+cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/super.franky.C05.com.conf
+```
+
+Edit file `super.franky.C05.com.conf` dengan perintah yang dimasukkan dalam general-script.sh
+```
+echo '<VirtualHost *:80>
+		ServerAdmin webmaster@localhost
+        ServerName super.franky.C05.com
+        ServerAlias www.super.franky.C05.com
+
+        DocumentRoot /var/www/super.franky.C05.com
+        
+ ErrorLog ${APACHE_LOG_DIR}/error.log
+ CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/super.franky.C05.com.conf
+```
+Setelah itu lakukan `a2ensite super.franky.C05.com` dan
+`service apache2 restart`
+
+**Pada EniesLobby**
+
+.
+
+Lakukan konfigurasi pada zone `super.franky.C05.com` yang berada di `super-franky-ws.sh` dan di bash.
+Lakukan restart bind9 `Service bind9 restart`
+
+**Pada Loguetown dan Alabasta**
+
+.
+
+Lakukan lynx www.super.franky.yyy.com dan berikut hasil nya:
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer10/no.10.png" width="700">
+
+
 
 ## 11. Akan tetapi, pada folder /public, Luffy ingin hanya dapat melakukan directory listing saja
+
+### Jawab
+**Pada Skypie**
+
+.
+
+Lakukan edit pada `super.franky.C05.com.conf`
+```
+echo '<VirtualHost *:80>
+ServerAdmin webmaster@localhost
+        ServerName super.franky.C05.com
+        ServerAlias www.super.franky.C05.com
+
+        DocumentRoot /var/www/super.franky.C05.com
+        <Directory /var/www/super.franky.C05.com/public>
+        Options +Indexes
+        </Directory>
+        
+ ErrorLog ${APACHE_LOG_DIR}/error.log
+ CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/super.franky.C05.com.conf
+```
+Lakukan `a2ensite super.franky.C05.com.conf`
+Lakukan perintah `service apache2 restart`
+
+**Pada Loguetown dan Alabasta**
+
+.
+
+Lakukan lynx super.franky.yyy.com/public dan berikut hasil nya:
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer11/no.11.png" width="700">
+
 
 ## 12. Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache
 **Pada router Skypie**
