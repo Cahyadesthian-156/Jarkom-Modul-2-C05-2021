@@ -1094,3 +1094,7 @@ Jalankan command `lynx http://super.franky.C05.com/public/images/franky.png` dan
 -> Pada persoalan no.8, 9, 10, 11, 12 (Saat melakukan lynx tidak mengeluarkan apa apa/ mengarah ke mercusuar.com)
 
 -> Pada persoalan no.16(IP skypie tidak mengarah ke www.franky.yyy.com)
+
+-> Server sering lost connection sehingga diperlukan untuk merestart web topologinya dan harus mendownload ulang
+
+-> Jaringan internet waktu mengerjakan praktikum mengalami kendala, sehingga kurang maksimal dalam pengerjaannya
