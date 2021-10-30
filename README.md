@@ -109,6 +109,7 @@ kemudian pada setiap node bisa dilakukan ping google.com atau apt-get update ata
 ### Jawab    
 
 **Pada EniesLobby**
+.
 Install paket yang dibutuhkan dalam proses
 ```
 apt-get update
@@ -172,6 +173,7 @@ mkdir /etc/bind/kaizoku
 ```
 
 **Pada Node Client Loguetown dan Alabasta**
+.
 ```
 nano /etc/resolv.conf
  ```
@@ -200,6 +202,7 @@ lalu melakukan percobaan ping franky.C05.com dan host -t CNAME www.franky.C05.co
 
 ### Jawab
 **Pada EniesLobby**
+.
 Buka file franky.C05.com dan edit file tersebut dan tambahkan konfigurasi subdomain untuk franky.yyy.com yaitu super.franky.yyy.com                      
 <img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer3/nomer3-1.jpg" width="700">
 ```
@@ -305,6 +308,7 @@ Kemudian restart bind9 dengan perintah ```service bind9 restart```
 
 
 **Pada node client Loguetown dan Alabasta**
+.
 Arahkan nameserver menuju IP Skypie dengan mengedit file resolv.conf dengan mengetikkan perintah ```nano /etc/resolv.conf``` lalu tambahkan
 
 ```
@@ -322,6 +326,7 @@ kemudian lakukan ping pada super.franky.C05.com dan www.super.franky.C05.com ata
 
 ### Jawab
 **Pada EniesLobby**
+.
 Edit file /etc/bind/named.conf.local ```nano /etc/bind/named.conf.local```
 tambahkan
 ```
@@ -384,6 +389,7 @@ $TTL	604800
 Kemudian restart bind9 dengan perintah ```service bind9 restart```
 
 **Pada node client Loguetown dan Alabasta** 
+.
 Cek dengan melakukan 
 ```host -t PTR 192.186.2.2```
 
@@ -397,6 +403,7 @@ Cek dengan melakukan
 ### Jawab
 
 **Pada EniesLobby**
+.
 Lakukan ```nano /etc/bind/named.conf.local```
 lalu ubah seperti pada bagian berikut
 
@@ -414,6 +421,7 @@ zone "franky.C05.com" {
 
 
 **Pada Water7**
+.
 Masukkan command dan install paket yang dibutuhkan dan perintah tersebut di masukkan dalam /root/.bashrc:
 
 ```
@@ -447,6 +455,7 @@ zone "franky.C05.com" {
 kemudian restart bind9 ```service bind9 restart```
 
 **Pada Loguetown dan Alabasta** 
+.
 Tambahkan IP Water7 sehingga nampak seperti                                       
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer5/nomer5-3.jpg" width="700">   
 
@@ -463,6 +472,7 @@ lalu di node client (Loguetown dan Alabasta) lakukan ping franky.C05.com
 
 ### Jawab
 **Pada EniesLobby**
+.
 Edit file /etc/bind/kaizoku/franky.C05.com
 
 ```
@@ -500,6 +510,7 @@ kemudian pada /etc/bind/named.conf.local, edit sebagai berikut
 
 
 **Pada Water7**
+.
 Di /etc/bind/named.conf.local
 
 ```
@@ -529,6 +540,7 @@ www		IN	      	CNAME		      	mecha.franky.C05.com.
 ```
 
 **Pada node client Loguetown dan Alabasta** 
+.
 Dapat dilakukan ```ping mecha.franky.C05.com```  dan  ```ping www.mecha.franky.C05.com```					
 
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer6/nomer6-7.jpg" width="700">   						
@@ -540,19 +552,105 @@ Dapat dilakukan ```ping mecha.franky.C05.com```  dan  ```ping www.mecha.franky.C
 ## 7. Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Water7 dengan nama general.mecha.franky.yyy.com dengan alias www.general.mecha.franky.yyy.com yang mengarah ke Skypie
 
 ### Jawab
+**Pada water7**
+.
+Pergi ke directory `/etc/bind/sunnygo/mecha.franky.C05.com` den edit:
+```
+$TTL     604800
+@          IN          SOA      mecha.franky.C05.com. root.mecha.franky.C05.com. (
+2021102601     ; Serial
+604800              ; Refresh
+86400                 ;Retry
+2419200            ; Expire
+604800 )            ; Negative Cache TTL
+;
+@              IN          NS             mecha.franky.C05.com.
+@              IN          A                192.186.2.4      ; IP Skypie
+www        IN    CNAME    mecha.franky.C05.com.
+ns1        IN    A        192.186.2.4
+general    IN    NS        ns1
+Setelah itu ke /etc/bind/named.conf.local tambahkan :
+ zone "general.mecha.franky.C05.com" {
+            type master;
+            file "/etc/bind/sunnygo/general.mecha.franky.C05.com";
+    };
+```
+Lalu membuat file di directory `/etc/bind/sunnygo/general.mecha.franky.C05.com`
+```
+$TTL     604800
+@          IN          SOA      general.mecha.franky.C05.com. root.general.mecha.franky.C05.com. (
+2021102601     ; Serial
+604800              ; Refresh
+86400                 ;Retry
+2419200            ; Expire
+604800 )            ; Negative Cache TTL
+;
+@              IN          NS             general.mecha.franky.C05.com
+@              IN          A                192.186.2.4      ; IP Skypie
+www        IN    CNAME general.mecha.franky.C05.com.
+```
+Untuk script.sh nya seperti berikut
+```
+echo -e '
+zone "franky.C05.com" {
+        type slave;
+        masters { 192.186.2.2; };
+        file "/var/lib/bind/franky.C05.com";
+};
+zone "mecha.franky.C05.com"{
+        type master;
+        file "/etc/bind/sunnygo/mecha.franky.C05.com";
+};
+zone "general.mecha.franky.C05.com" {
+        type master;
+        file "/etc/bind/sunnygo/general.mecha.franky.C05.com";
+};> /etc/bind/named.conf.local
 
+echo ';
+$TTL    604800
+@       IN              SOA     general.mecha.franky.C05.com. root.general.mecha.franky.C05.com. (
+                                2021102601              ; Serial
+                                604800                  ; Refresh
+                                86400                   ;Retry
+                                2419200                 ; Expire
+                                604800 )                ; Negative Cache TTL
+;
+@               IN      NS              general.mecha.franky.C05.com.
+@               IN      A               192.186.2.4     ; IP Skypie
+www             IN      CNAME           general.mecha.franky.C05.com.' > /etc/bind/sunnygo/general.mecha.franky.C05.com
 
+echo ';
+$TTL    604800
+@               IN      SOA     mecha.franky.C05.com. root.mecha.franky.C05.com. (
+                        2021102601      ; Serial
+                        604800          ; Refresh
+                        86400           ;Retry
+                        2419200         ; Expire
+                        604800 )        ; Negative Cache TTL
+;
+@               IN      NS              mecha.franky.C05.com.
+@               IN      A               192.186.2.4     ; IP Skypie
+www             IN      CNAME           mecha.franky.C05.com.
+ns1             IN      A               192.186.2.4
+general         IN      NS              ns1'> /etc/bind/sunnygo/mecha.franky.C05.com
+```
+Setelah itu lakukan :
+`service bind9 restart`
 
-
-
-
-
-
+**Pada Loguetown**
+.
+Lakukan ping general.mecha.franky.C05.com dan host -t CNAME www.general.mecha.franky.C05.com
+Hasil nya seperti berikut:
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer7/no.7.png" width="700">
+.
+.
+.
                                
 ## 8. Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pertama dengan webserver www.franky.yyy.com. Pertama, luffy membutuhkan webserver dengan DocumentRoot pada /var/www/franky.yyy.com.
 
 ### Jawab
-** Pada Skypie**
+**Pada Skypie**
+.
 Install paket yang diperlukan terlebih dahulu (Masukkan pada /root/.bashrc) dan jalankan (bash /root/.bashrc)
 ```
 echo nameserver 192.168.122.1 > /etc/resolv.conf
@@ -573,31 +671,66 @@ mv franky/home.html /var/www/franky.C05.com
 mv franky/index.php /var/www/franky.C05.com
 cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/franky.C05.com.conf
 ```
+
+Lakukan edit franky.C05.com.conf, pada kasus ini kami buat script bernama general-script.sh dan melakukan perintah seperti berikut:
+```
+echo '<VirtualHost *:80>
+
+        ServerAdmin webmaster@localhost
+        ServerName franky.C05.com
+        ServerAlias www.franky.C05.com
+        DocumentRoot /var/www/franky.C05.com
+ 		ErrorLog ${APACHE_LOG_DIR}/error.log
+ 		CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/franky.C05.com.conf
+```
 Pada directory `/etc/apache2/sites-available` lakukan perintah `a2ensite franky.C05.com.conf`
 Kemudian restart dengan perintah `service apache2 restart`
+
 **Pada EniesLobby**
-
-Lakukan konfigurasi pada zone `franky.C05.com`
-
-Lakukan restart bind9 dengan perintah `Service bind9 restart`
+.
+Lakukan konfigurasi pada zone `franky.C05.com` pada kasus ini konfigurasi franky.C05.com sudah kami buat dalam `webserver.sh` dan hanya perlu melakukan bash.
+.
+Setelah itu lakukan restart bind9 dengan perintah `Service bind9 restart`
 
 **Pada Loguetown dan Alabasta**
-
-Lakukan instalasi pada lynx dengan mengetikkan perintah `apt-get install lynx -y`
-
-Lalu jalankan perintah `lynx franky.C05.com`
+.
+Lakukan instalasi pada lynx dengan mengetikkan perintah `apt-get install lynx -y` (masukkan dalam dalam /root/.bashrc)
+.
+Lalu jalankan perintah `lynx franky.C05.com` Hasil nya :
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer8/no.8.png" width="700">
+.
+.
+.
 
 ## 9. Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home dapat menjadi menjadi www.franky.yyy.com/home. 
 ### Jawab
-** Pada Skypie**
+**Pada Skypie**
+.
 Edit file `franky.C05.com.conf` pada directory `/etc/apache2/sites-available` dan tambahkan 
 ```
 <Directory /var/www/franky.C05.com>
-Options Indexes +FollowSymLinks -MultiViews
-AllowOverride All
+	Options Indexes +FollowSymLinks -MultiViews
+	AllowOverride All
 </Directory>
 ```
+Lalu ubah .htaccess
+```
+echo 'RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^home$ /index.php/home
+' > /var/www/franky.C05.com/.htaccess
+```
 Lalu lalukan perintah `a2enmod rewrite`
+
+Lakukan restart dengan `service apache2 restart`
+
+**Pada Loguetown dan Alabasta**
+.
+Lakukan lynx franky.C05.com/home
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer9/no.9.png" width="700">
+
 
 ## 10. Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpanan aset yang memiliki DocumentRoot pada /var/www/super.franky.yyy.com 
 
