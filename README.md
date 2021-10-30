@@ -540,6 +540,7 @@ kemudian pada node client ( Loguetown dan Alabasta ) dapat dilakukan ```ping mec
 
 
 
+
 .                               
 
 ## Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pertama dengan webserver www.franky.yyy.com. Pertama, luffy membutuhkan webserver dengan DocumentRoot pada /var/www/franky.yyy.com.
@@ -565,17 +566,15 @@ mv franky/home.html /var/www/franky.C05.com
 mv franky/index.php /var/www/franky.C05.com
 cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/franky.C05.com.conf
 ```
-Lakukan edit franky.C05.com.conf, pada kasus ini kami buat script bernama general-script.sh dan melakukan perintah seperti berikut:
-```
-echo '<VirtualHost *:80>
-	ServerAdmin webmaster@localhost
-	ServerName franky.C05.com
-    	ServerAlias www.franky.C05.com
-    	DocumentRoot /var/www/franky.C05.com
- ErrorLog ${APACHE_LOG_DIR}/error.log
- CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>' > /etc/apache2/sites-available/franky.C05.com.conf
-```
+**Pada EniesLobby**
+
+Lakukan konfigurasi pada zone `franky.C05.com`
+
+Lakukan restart bind9 dengan perintah `Service bind9 restart`
+
+**Pada Loguetown dan Alabasta**
+Lakukan instalasi pada lynx dengan mengetikkan perintah `apt-get install lynx -y`
+Lalu jalankan perintah `lynx franky.C05.com`
 
 ## Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache 
 **Pada router Skypie**
