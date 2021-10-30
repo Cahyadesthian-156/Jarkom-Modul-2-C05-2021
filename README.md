@@ -819,7 +819,7 @@ Lakukan restart bind9 `Service bind9 restart`
 
 .
 
-Lakukan lynx www.super.franky.yyy.com dan berikut hasil nya:
+Lakukan lynx www.super.franky.C05.com dan berikut hasil nya:
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer10/no.10.png" width="700">
 
 
@@ -854,7 +854,7 @@ Lakukan perintah `service apache2 restart`
 
 .
 
-Lakukan lynx super.franky.yyy.com/public dan berikut hasil nya:
+Lakukan lynx super.franky.C05.com/public dan berikut hasil nya:
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer11/no.11.png" width="700">
 
 
