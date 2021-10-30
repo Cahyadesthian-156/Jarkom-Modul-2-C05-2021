@@ -8,7 +8,7 @@ Cahyadesthian R. Widigda (05111940000156)
 # Praktikum Modul 2
 ### 📅 24-26 September 2021            
 .                     
-## (1) Luffy adalah seorang yang akan jadi Raja Bajak Laut. Demi membuat Luffy menjadi Raja Bajak Laut, Nami ingin membuat sebuah peta, bantu Nami untuk membuat peta berikut:
+## ## 1. Luffy adalah seorang yang akan jadi Raja Bajak Laut. Demi membuat Luffy menjadi Raja Bajak Laut, Nami ingin membuat sebuah peta, bantu Nami untuk membuat peta berikut:
 <img src="https://github.com/Cahyadesthian-156/empty/blob/main/petaluffy.png?raw=trueg" width="800">  
 
 ## EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, dan Skypie akan digunakan sebagai Web Server. Terdapat 2 Client yaitu Loguetown, dan Alabasta. Semua node terhubung pada router Foosha, sehingga dapat mengakses internet
@@ -100,10 +100,10 @@ kemudian pada setiap node bisa dilakukan ping google.com atau apt-get update ata
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer1/loguetown-setup.png" width="400">   
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer1/skypie-wetup.png" width="400">   
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer1/water7-setup.png" width="400">   
-.                                                                                           
-.                                                                                                         
-.                                                                                                                                                                                                     
-## (2) Luffy ingin menghubungi Franky yang berada di EniesLobby dengan denden mushi. Kalian diminta Luffy untuk membuat website utama dengan mengakses franky.yyy.com dengan alias www.franky.yyy.com pada folder kaizoku 
+                                                                                           
+                                                                                                                                                                                                                                                                                    
+## 2. Luffy ingin menghubungi Franky yang berada di EniesLobby dengan denden mushi. Kalian diminta Luffy untuk membuat website utama dengan mengakses franky.yyy.com dengan alias www.franky.yyy.com pada folder kaizoku
+
 
 
 ### Jawab    
@@ -195,7 +195,7 @@ lalu melakukan percobaan ping franky.C05.com dan host -t CNAME www.franky.C05.co
 .                                                                                                                                 
 .                                         
 
-## (3)Setelah itu buat subdomain super.franky.yyy.com dengan alias www.super.franky.yyy.com yang diatur DNS nya di EniesLobby dan mengarah ke Skypie
+## 3. Setelah itu buat subdomain super.franky.yyy.com dengan alias www.super.franky.yyy.com yang diatur DNS nya di EniesLobby dan mengarah ke Skypie
 
 ### Jawab
 Pada EniesLobby, buka file franky.C05.com dan edit file tersebut dan tambahkan konfigurasi subdomain untuk franky.yyy.com yaitu super.franky.yyy.com                      
@@ -313,11 +313,10 @@ nameserver 192.186.2.4
 
 kemudian lakukan ping pada super.franky.C05.com dan www.super.franky.C05.com atau host -t CNAME www.super.franky.C05.com dan www.super.franky.C05.com                     
 <img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer3/nomer3-5.jpg" width="700">                         
-.                                                                                         
-.                                                                            
-.                             
-## (4) Buat juga reverse domain untuk domain utama 
-
+                                                                                         
+                                                                            
+                             
+## 4. Buat juga reverse domain untuk domain utama
 
 ### Jawab
 Pada EniesLobby, edit file /etc/bind/named.conf.local ```nano /etc/bind/named.conf.local```
@@ -389,7 +388,7 @@ setelah itu pada node client (Loguetown dan Alabasta) cek dengan melakukan
 .                                                                                         
 .                                                                                                           
 .                                                                       
-## (5)Supaya tetap bisa menghubungi Franky jika server EniesLobby rusak, maka buat Water7 sebagai DNS Slave untuk domain utama 
+## 5. Supaya tetap bisa menghubungi Franky jika server EniesLobby rusak, maka buat Water7 sebagai DNS Slave untuk domain utama
 
 ### Jawab
 
@@ -454,7 +453,7 @@ lalu di node client (Loguetown dan Alabasta) lakukan ping franky.C05.com
 .                                                                 
 .   
 
-## (6) Setelah itu terdapat subdomain mecha.franky.yyy.com dengan alias www.mecha.franky.yyy.com yang didelegasikan dari EniesLobby ke Water7 dengan IP menuju ke Skypie dalam folder sunnygo
+## 6. Setelah itu terdapat subdomain mecha.franky.yyy.com dengan alias www.mecha.franky.yyy.com yang didelegasikan dari EniesLobby ke Water7 dengan IP menuju ke Skypie dalam folder sunnygo
 
 ### Jawab
 Pada EniesLobby, edit file /etc/bind/kaizoku/franky.C05.com
@@ -529,7 +528,7 @@ kemudian pada node client ( Loguetown dan Alabasta ) dapat dilakukan ```ping mec
 .               					
 
 
-## (7)Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Water7 dengan nama general.mecha.franky.yyy.com dengan alias www.general.mecha.franky.yyy.com yang mengarah ke Skypie
+## 7. Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Water7 dengan nama general.mecha.franky.yyy.com dengan alias www.general.mecha.franky.yyy.com yang mengarah ke Skypie
 
 ### Jawab
 
@@ -540,10 +539,9 @@ kemudian pada node client ( Loguetown dan Alabasta ) dapat dilakukan ```ping mec
 
 
 
+                               
+## 8. Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pertama dengan webserver www.franky.yyy.com. Pertama, luffy membutuhkan webserver dengan DocumentRoot pada /var/www/franky.yyy.com.
 
-.                               
-
-## Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pertama dengan webserver www.franky.yyy.com. Pertama, luffy membutuhkan webserver dengan DocumentRoot pada /var/www/franky.yyy.com.
 ### Jawab
 ** Pada Skypie**
 Install paket yang diperlukan terlebih dahulu (Masukkan pada /root/.bashrc) dan jalankan (bash /root/.bashrc)
@@ -580,7 +578,7 @@ Lakukan instalasi pada lynx dengan mengetikkan perintah `apt-get install lynx -y
 
 Lalu jalankan perintah `lynx franky.C05.com`
 
-## Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home dapat menjadi menjadi www.franky.yyy.com/home. 
+## 9. Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home dapat menjadi menjadi www.franky.yyy.com/home. 
 ### Jawab
 ** Pada Skypie**
 Edit file `franky.C05.com.conf` pada directory `/etc/apache2/sites-available` dan tambahkan 
@@ -592,9 +590,12 @@ AllowOverride All
 ```
 Lalu lalukan perintah `a2enmod rewrite`
 
+## 10. Setelah itu, pada subdomain www.super.franky.yyy.com, Luffy membutuhkan penyimpanan aset yang memiliki DocumentRoot pada /var/www/super.franky.yyy.com 
 
 
-## Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache 
+## 11. Akan tetapi, pada folder /public, Luffy ingin hanya dapat melakukan directory listing saja
+
+## 12. Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache
 **Pada router Skypie**
 
 Edit file `super.franky.C05.com.conf`pada directory `/etc/apache2/sites-available` dan tambahkan 
@@ -611,7 +612,7 @@ Kemudian restart dengan perintah `service apache2 restart`
 
 Lakukan perintah ```lynx super.franky.C05.com/rickygantengbosskuh ``` untuk melihat hasil errornya
 
-## Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.yyy.com/public/js menjadi www.super.franky.yyy.com/js
+## 13. Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.yyy.com/public/js menjadi www.super.franky.yyy.com/js. 
 **Pada router Skypie**
 
 Edit file `super.franky.C05.com.conf` pada directory `/etc/apache2/sites-available` dan tambahkan
@@ -622,7 +623,7 @@ Kemudian restrart dengan perintah ``` service apache2 restart ```
 Pada Loguetown dan Alabasta
 Lakukan perintah ```lynx super.franky.C05.com/js ``` untuk melihat hasilnya
 
-## Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
+## 14. Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
 **Pada router Skypie**
 
 Pada command.sh beri perintah berikut, dengan langkah membuat directory terlebih dahulu, setelah itu mendownload file zip dan meng unzip file tersebut.Lalu dilakukan pemindahan data dari super.franky ke super.franky.C05.com. Setelah itu lakukan copy pada 000-default.conf 
@@ -686,7 +687,7 @@ Lakukan restart bind9 dengan perintah `Service bind9 restart`
 
 Jalankan perintah`lynx general.mecha.franky.C05.com :15000`
 
-## dengan authentikasi username luffy dan password onepiece dan file di /var/www/general.mecha.franky.yyy
+## 15. dengan authentikasi username luffy dan password onepiece dan file di /var/www/general.mecha.franky.yyy
 **Pada router Skypie**
 
 Buat username (luffy) dan password dengan menginputkan comment `htpasswd -c /etc/apache2/.htpasswd luffy` Kemudian isi password sesuai kiteria (onepiece)
@@ -709,7 +710,9 @@ Kemudian restart dengan perintah `service apache2 restart`
 
 **Pada Loguetown dan Alabasta**
 Jalankan perintah `lynx general.mecha.franky.C05.com :15000`
-## Dan setiap kali mengakses IP Skypie akan diahlikan secara otomatis ke www.franky.yyy.com
+
+
+## 16. Dan setiap kali mengakses IP Skypie akan diahlikan secara otomatis ke www.franky.yyy.com
 **Pada Skypie**
 
 Buat file `.htacces` pada directory `/var/www/html` dan edit sebagai berikut
@@ -739,7 +742,7 @@ Lakukan restart bind9 dengan perintah `Service bind9 restart`
 **Pada Loguetown dan Alabasta**
 Jalankan perintah `lynx 192.186.2.4`
 
-## Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melalui website www.super.franky.yyy.com, dan dikarenakan pengunjung web server pasti akan bingung dengan randomnya images yang ada, maka Franky juga meminta untuk mengganti request gambar yang memiliki substring “franky” akan diarahkan menuju franky.png. Maka bantulah Luffy untuk membuat konfigurasi dns dan web server ini!
+## 17. Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melalui website www.super.franky.yyy.com, dan dikarenakan pengunjung web server pasti akan bingung dengan randomnya images yang ada, maka Franky juga meminta untuk mengganti request gambar yang memiliki substring “franky” akan diarahkan menuju franky.png. Maka bantulah Luffy untuk membuat konfigurasi dns dan web server ini!
 
 **Pada Skypie**
 Edit file pada `super.franky.C05.com.conf` pada directory `/etc/apache2/sites-available/` dengan menambahkan:
