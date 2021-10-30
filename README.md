@@ -542,6 +542,40 @@ kemudian pada node client ( Loguetown dan Alabasta ) dapat dilakukan ```ping mec
 
 .                               
 
+## Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pertama dengan webserver www.franky.yyy.com. Pertama, luffy membutuhkan webserver dengan DocumentRoot pada /var/www/franky.yyy.com.
+### Jawab
+** Pada Skypie**
+Install paket yang diperlukan terlebih dahulu (Masukkan pada /root/.bashrc) dan jalankan (bash /root/.bashrc)
+```
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+apt-get update
+apt-get install apache2 -y
+apt-get install php -y
+apt-get install libapache2-mod-php7.0 -y
+apt-get install nano
+apt-get install unzip -y
+apt-get install wget -y
+```
+Masukkan perintah buat directory, download file yang ingin di download di command.sh, pindahkan file yang di download ke directory yang sudah ditentukan, dan lakukan copy pada 000-default.conf ke franky.C05.com.conf
+```
+mkdir /var/www/franky.C05.com
+wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/franky.zip
+unzip franky.zip
+mv franky/home.html /var/www/franky.C05.com
+mv franky/index.php /var/www/franky.C05.com
+cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/franky.C05.com.conf
+```
+Lakukan edit franky.C05.com.conf, pada kasus ini kami buat script bernama general-script.sh dan melakukan perintah seperti berikut:
+```
+echo '<VirtualHost *:80>
+	ServerAdmin webmaster@localhost
+	ServerName franky.C05.com
+    	ServerAlias www.franky.C05.com
+    	DocumentRoot /var/www/franky.C05.com
+ ErrorLog ${APACHE_LOG_DIR}/error.log
+ CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' > /etc/apache2/sites-available/franky.C05.com.conf
+```
 
 ## Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache 
 **Pada router Skypie**
