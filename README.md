@@ -977,12 +977,19 @@ Kemudian restart dengan perintah `service apache2 restart`
 
 Jalankan perintah `lynx general.mecha.franky.C05.com :15000` maka akan menampilkan seperti berikut:
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer15/no.15-1.png" width="700">
+
+.
+
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer15/no.15-2.png" width="700">
 
-
+.
+.
+.
 
 ## 16. Dan setiap kali mengakses IP Skypie akan diahlikan secara otomatis ke www.franky.yyy.com
 **Pada Skypie**
+
+.
 
 Buat file `.htacces` pada directory `/var/www/html` dan edit sebagai berikut
 ```
@@ -1000,20 +1007,30 @@ Kemudian, edit file `/000-default.conf`  pada directory `/etc/apache2/sites-avai
      AllowOverride All
 </Directory>
 ```
-Kemudian restrart dengan perintah `service apache2 restart`
+Kemudian restart dengan perintah `service apache2 restart`
 
 **Pada EniesLobby**
+
+.
 
 Lakukan konfigurasi pada zone franky.C05.com
 
 Lakukan restart bind9 dengan perintah `Service bind9 restart`
 
 **Pada Loguetown dan Alabasta**
-Jalankan perintah `lynx 192.186.2.4`
+Jalankan perintah `lynx 192.186.2.4` dan berikut hasilnya:
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer16/no.16.png" width="700">
+
+.
+.
+.
 
 ## 17. Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melalui website www.super.franky.yyy.com, dan dikarenakan pengunjung web server pasti akan bingung dengan randomnya images yang ada, maka Franky juga meminta untuk mengganti request gambar yang memiliki substring “franky” akan diarahkan menuju franky.png. Maka bantulah Luffy untuk membuat konfigurasi dns dan web server ini!
 
 **Pada Skypie**
+
+.
+
 Edit file pada `super.franky.C05.com.conf` pada directory `/etc/apache2/sites-available/` dengan menambahkan:
  ```
  <Directory /var/www/super.franky.C05.com>
@@ -1034,10 +1051,13 @@ Kemudian restart dengan perintah ` service apache2 restart `
 
 **Pada EniesLobby**
 
+.
+
 Lakukan konfigurasi pada zone super.franky.C05.com
 
 Lakukan restart bind9 dengan perintah `Service bind9 restart`
 
 **Pada Loguetown dan Alabasta**
 
-Jalankan command `lynx http://super.franky.C05.com/public/images/franky.png`
+Jalankan command `lynx http://super.franky.C05.com/public/images/franky.png` dan berikut hasilnya:
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer17/no.17.png" width="700">
