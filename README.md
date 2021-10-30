@@ -835,6 +835,8 @@ Lakukan lynx super.franky.yyy.com/public dan berikut hasil nya:
 ## 12. Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache
 **Pada router Skypie**
 
+.
+
 Edit file `super.franky.C05.com.conf`pada directory `/etc/apache2/sites-available` dan tambahkan 
 ``` 
     ErrorDocument 404 /error/404.html
@@ -847,21 +849,36 @@ Edit file `super.franky.C05.com.conf`pada directory `/etc/apache2/sites-availabl
 Kemudian restart dengan perintah `service apache2 restart`
 **Pada Loguetown dan Alabasta**
 
+.
+
 Lakukan perintah ```lynx super.franky.C05.com/rickygantengbosskuh ``` untuk melihat hasil errornya
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer12/no.12.png" width="700">
+
+.
+.
+.
 
 ## 13. Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.super.franky.yyy.com/public/js menjadi www.super.franky.yyy.com/js. 
 **Pada router Skypie**
+
+.
 
 Edit file `super.franky.C05.com.conf` pada directory `/etc/apache2/sites-available` dan tambahkan
 ```Alias "/js" "/var/www/super.franky.C05.com/public/js"```
 Lakukan ```a2ensite super.franky.C05.com.conf```
 Kemudian restrart dengan perintah ``` service apache2 restart ```
 
-Pada Loguetown dan Alabasta
-Lakukan perintah ```lynx super.franky.C05.com/js ``` untuk melihat hasilnya
+**Pada Loguetown dan Alabasta**
+
+.
+
+Lakukan perintah ```lynx super.franky.C05.com/js ``` untuk melihat hasilnya:
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer13/no.13.png" width="700">
 
 ## 14. Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
 **Pada router Skypie**
+
+.
 
 Pada command.sh beri perintah berikut, dengan langkah membuat directory terlebih dahulu, setelah itu mendownload file zip dan meng unzip file tersebut.Lalu dilakukan pemindahan data dari super.franky ke super.franky.C05.com. Setelah itu lakukan copy pada 000-default.conf 
 ```
@@ -916,13 +933,22 @@ Kemudian restart dengan perintah ` service apache2 restart `
 
 **Pada EniesLobby**
 
+.
+
 Lakukan konfigurasi pada zone general.mecha.franky.C05.com
 
 Lakukan restart bind9 dengan perintah `Service bind9 restart`
 
-**Pada Loguetown dan Alabasta **
+**Pada Loguetown dan Alabasta**
 
-Jalankan perintah`lynx general.mecha.franky.C05.com :15000`
+.
+
+Jalankan perintah`lynx general.mecha.franky.C05.com :15000` dan hasilnya:
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer14/no.14.png" width="700">
+
+.
+.
+.
 
 ## 15. dengan authentikasi username luffy dan password onepiece dan file di /var/www/general.mecha.franky.yyy
 **Pada router Skypie**
@@ -946,7 +972,13 @@ Edit file general.mecha.franky.C05.com.conf pada directory /etc/apache2/sites-av
 Kemudian restart dengan perintah `service apache2 restart`
 
 **Pada Loguetown dan Alabasta**
-Jalankan perintah `lynx general.mecha.franky.C05.com :15000`
+
+.
+
+Jalankan perintah `lynx general.mecha.franky.C05.com :15000` maka akan menampilkan seperti berikut:
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer15/no.15-1.png" width="700">
+<img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer15/no.15-2.png" width="700">
+
 
 
 ## 16. Dan setiap kali mengakses IP Skypie akan diahlikan secara otomatis ke www.franky.yyy.com
