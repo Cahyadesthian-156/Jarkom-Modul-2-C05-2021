@@ -8,7 +8,7 @@ Cahyadesthian R. Widigda (05111940000156)
 # Praktikum Modul 2
 ### 📅 24-26 September 2021            
 .                     
-## ## 1. Luffy adalah seorang yang akan jadi Raja Bajak Laut. Demi membuat Luffy menjadi Raja Bajak Laut, Nami ingin membuat sebuah peta, bantu Nami untuk membuat peta berikut:
+## 1. Luffy adalah seorang yang akan jadi Raja Bajak Laut. Demi membuat Luffy menjadi Raja Bajak Laut, Nami ingin membuat sebuah peta, bantu Nami untuk membuat peta berikut:
 <img src="https://github.com/Cahyadesthian-156/empty/blob/main/petaluffy.png?raw=trueg" width="800">  
 
 ## EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, dan Skypie akan digunakan sebagai Web Server. Terdapat 2 Client yaitu Loguetown, dan Alabasta. Semua node terhubung pada router Foosha, sehingga dapat mengakses internet
@@ -100,15 +100,16 @@ kemudian pada setiap node bisa dilakukan ping google.com atau apt-get update ata
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer1/loguetown-setup.png" width="400">   
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer1/skypie-wetup.png" width="400">   
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer1/water7-setup.png" width="400">   
-                                                                                           
-                                                                                                                                                                                                                                                                                    
+.
+.
+.                                                                                           
+                                                                                                                                                                                                                                                                          
 ## 2. Luffy ingin menghubungi Franky yang berada di EniesLobby dengan denden mushi. Kalian diminta Luffy untuk membuat website utama dengan mengakses franky.yyy.com dengan alias www.franky.yyy.com pada folder kaizoku
-
-
 
 ### Jawab    
 
-Pada EniesLobby, Install paket yang dibutuhkan dalam proses
+**Pada EniesLobby**
+Install paket yang dibutuhkan dalam proses
 ```
 apt-get update
 apt-get install bind9 -y
@@ -170,7 +171,7 @@ command.sh
 mkdir /etc/bind/kaizoku
 ```
 
-kemudian pada Node Client ( Loguetown dan Alabasta )
+**Pada Node Client Loguetown dan Alabasta**
 ```
 nano /etc/resolv.conf
  ```
@@ -198,7 +199,8 @@ lalu melakukan percobaan ping franky.C05.com dan host -t CNAME www.franky.C05.co
 ## 3. Setelah itu buat subdomain super.franky.yyy.com dengan alias www.super.franky.yyy.com yang diatur DNS nya di EniesLobby dan mengarah ke Skypie
 
 ### Jawab
-Pada EniesLobby, buka file franky.C05.com dan edit file tersebut dan tambahkan konfigurasi subdomain untuk franky.yyy.com yaitu super.franky.yyy.com                      
+**Pada EniesLobby**
+Buka file franky.C05.com dan edit file tersebut dan tambahkan konfigurasi subdomain untuk franky.yyy.com yaitu super.franky.yyy.com                      
 <img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer3/nomer3-1.jpg" width="700">
 ```
 $TTL 	604800
@@ -215,7 +217,6 @@ www    	    IN      	CNAME        	franky.C05.com.
 super  	    IN      	A            	192.186.2.4   ;IPSkypie
 @      		  IN      	A            	192.186.2.4
 ```
-
 
 kemudian buat Zone baru ```nano /etc/bind/named.conf.local```                                               
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer3/nomer3-2.jpg" width="700">
@@ -303,7 +304,8 @@ www 	IN          	CNAME       	super.franky.C05.com.
 Kemudian restart bind9 dengan perintah ```service bind9 restart```
 
 
-Pada node client (Loguetown dan Alabasta), arahkan nameserver menuju IP Skypie dengan mengedit file resolv.conf dengan mengetikkan perintah ```nano /etc/resolv.conf``` lalu tambahkan
+**Pada node client Loguetown dan Alabasta**
+Arahkan nameserver menuju IP Skypie dengan mengedit file resolv.conf dengan mengetikkan perintah ```nano /etc/resolv.conf``` lalu tambahkan
 
 ```
 nameserver 192.186.2.2
@@ -319,7 +321,8 @@ kemudian lakukan ping pada super.franky.C05.com dan www.super.franky.C05.com ata
 ## 4. Buat juga reverse domain untuk domain utama
 
 ### Jawab
-Pada EniesLobby, edit file /etc/bind/named.conf.local ```nano /etc/bind/named.conf.local```
+**Pada EniesLobby**
+Edit file /etc/bind/named.conf.local ```nano /etc/bind/named.conf.local```
 tambahkan
 ```
 zone "2.186.192.in-addr.arpa" {
@@ -380,7 +383,8 @@ $TTL	604800
 
 Kemudian restart bind9 dengan perintah ```service bind9 restart```
 
-setelah itu pada node client (Loguetown dan Alabasta) cek dengan melakukan 
+**Pada node client Loguetown dan Alabasta** 
+Cek dengan melakukan 
 ```host -t PTR 192.186.2.2```
 
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer4/nomer4-3.jpg" width="700">     
@@ -392,7 +396,8 @@ setelah itu pada node client (Loguetown dan Alabasta) cek dengan melakukan
 
 ### Jawab
 
-Pada EniesLobby, lakukan ```nano /etc/bind/named.conf.local```
+**Pada EniesLobby**
+Lakukan ```nano /etc/bind/named.conf.local```
 lalu ubah seperti pada bagian berikut
 
 ```
@@ -408,7 +413,7 @@ zone "franky.C05.com" {
 
 
 
-Pada Water7
+**Pada Water7**
 Masukkan command dan install paket yang dibutuhkan dan perintah tersebut di masukkan dalam /root/.bashrc:
 
 ```
@@ -441,7 +446,8 @@ zone "franky.C05.com" {
 
 kemudian restart bind9 ```service bind9 restart```
 
-setelah itu pada Loguetown dan Alabasta tambahkan IP Water7 sehingga nampak seperti                                       
+**Pada Loguetown dan Alabasta** 
+Tambahkan IP Water7 sehingga nampak seperti                                       
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer5/nomer5-3.jpg" width="700">   
 
 Untuk melakukan cek keberhasilan konfigurasi, matikan bind9 yang ada pada EniesLobby dengan command:
@@ -456,7 +462,8 @@ lalu di node client (Loguetown dan Alabasta) lakukan ping franky.C05.com
 ## 6. Setelah itu terdapat subdomain mecha.franky.yyy.com dengan alias www.mecha.franky.yyy.com yang didelegasikan dari EniesLobby ke Water7 dengan IP menuju ke Skypie dalam folder sunnygo
 
 ### Jawab
-Pada EniesLobby, edit file /etc/bind/kaizoku/franky.C05.com
+**Pada EniesLobby**
+Edit file /etc/bind/kaizoku/franky.C05.com
 
 ```
 $TTL 	604800
@@ -492,7 +499,8 @@ kemudian pada /etc/bind/named.conf.local, edit sebagai berikut
 
 
 
-Pada Water7, di /etc/bind/named.conf.local
+**Pada Water7**
+Di /etc/bind/named.conf.local
 
 ```
 zone "mecha.franky.C05.com" {\n\t
@@ -520,7 +528,8 @@ general	  	IN	      	A		        192.186.2.4
 www		IN	      	CNAME		      	mecha.franky.C05.com.
 ```
 
-kemudian pada node client ( Loguetown dan Alabasta ) dapat dilakukan ```ping mecha.franky.C05.com```  dan  ```ping www.mecha.franky.C05.com```					
+**Pada node client Loguetown dan Alabasta** 
+Dapat dilakukan ```ping mecha.franky.C05.com```  dan  ```ping www.mecha.franky.C05.com```					
 
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer6/nomer6-7.jpg" width="700">   						
 .         												                
