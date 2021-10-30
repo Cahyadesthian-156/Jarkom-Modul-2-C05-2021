@@ -109,7 +109,9 @@ kemudian pada setiap node bisa dilakukan ping google.com atau apt-get update ata
 ### Jawab    
 
 **Pada EniesLobby**
+
 .
+
 Install paket yang dibutuhkan dalam proses
 ```
 apt-get update
@@ -173,7 +175,9 @@ mkdir /etc/bind/kaizoku
 ```
 
 **Pada Node Client Loguetown dan Alabasta**
+
 .
+
 ```
 nano /etc/resolv.conf
  ```
@@ -202,7 +206,9 @@ lalu melakukan percobaan ping franky.C05.com dan host -t CNAME www.franky.C05.co
 
 ### Jawab
 **Pada EniesLobby**
+
 .
+
 Buka file franky.C05.com dan edit file tersebut dan tambahkan konfigurasi subdomain untuk franky.yyy.com yaitu super.franky.yyy.com                      
 <img src="https://github.com/Cahyadesthian-156/empty/blob/main/praktikum/praktikumjarkom2/nomer3/nomer3-1.jpg" width="700">
 ```
@@ -308,7 +314,9 @@ Kemudian restart bind9 dengan perintah ```service bind9 restart```
 
 
 **Pada node client Loguetown dan Alabasta**
+
 .
+
 Arahkan nameserver menuju IP Skypie dengan mengedit file resolv.conf dengan mengetikkan perintah ```nano /etc/resolv.conf``` lalu tambahkan
 
 ```
@@ -326,7 +334,9 @@ kemudian lakukan ping pada super.franky.C05.com dan www.super.franky.C05.com ata
 
 ### Jawab
 **Pada EniesLobby**
+
 .
+
 Edit file /etc/bind/named.conf.local ```nano /etc/bind/named.conf.local```
 tambahkan
 ```
@@ -389,7 +399,9 @@ $TTL	604800
 Kemudian restart bind9 dengan perintah ```service bind9 restart```
 
 **Pada node client Loguetown dan Alabasta** 
+
 .
+
 Cek dengan melakukan 
 ```host -t PTR 192.186.2.2```
 
@@ -403,7 +415,9 @@ Cek dengan melakukan
 ### Jawab
 
 **Pada EniesLobby**
+
 .
+
 Lakukan ```nano /etc/bind/named.conf.local```
 lalu ubah seperti pada bagian berikut
 
@@ -421,7 +435,9 @@ zone "franky.C05.com" {
 
 
 **Pada Water7**
+
 .
+
 Masukkan command dan install paket yang dibutuhkan dan perintah tersebut di masukkan dalam /root/.bashrc:
 
 ```
@@ -455,7 +471,9 @@ zone "franky.C05.com" {
 kemudian restart bind9 ```service bind9 restart```
 
 **Pada Loguetown dan Alabasta** 
+
 .
+
 Tambahkan IP Water7 sehingga nampak seperti                                       
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer5/nomer5-3.jpg" width="700">   
 
@@ -472,7 +490,9 @@ lalu di node client (Loguetown dan Alabasta) lakukan ping franky.C05.com
 
 ### Jawab
 **Pada EniesLobby**
+
 .
+
 Edit file /etc/bind/kaizoku/franky.C05.com
 
 ```
@@ -510,7 +530,9 @@ kemudian pada /etc/bind/named.conf.local, edit sebagai berikut
 
 
 **Pada Water7**
+
 .
+
 Di /etc/bind/named.conf.local
 
 ```
@@ -540,7 +562,9 @@ www		IN	      	CNAME		      	mecha.franky.C05.com.
 ```
 
 **Pada node client Loguetown dan Alabasta** 
+
 .
+
 Dapat dilakukan ```ping mecha.franky.C05.com```  dan  ```ping www.mecha.franky.C05.com```					
 
 <img src="https://github.com/Cahyadesthian-156/Jarkom-Modul-2-C05-2021/blob/main/screenshot/nomer6/nomer6-7.jpg" width="700">   						
@@ -571,7 +595,9 @@ $TTL     604800
 www        IN    CNAME    mecha.franky.C05.com.
 ns1        IN    A        192.186.2.4
 general    IN    NS        ns1
-Setelah itu ke /etc/bind/named.conf.local tambahkan :
+```
+Setelah itu ke `/etc/bind/named.conf.local` tambahkan :
+``` 
  zone "general.mecha.franky.C05.com" {
             type master;
             file "/etc/bind/sunnygo/general.mecha.franky.C05.com";
